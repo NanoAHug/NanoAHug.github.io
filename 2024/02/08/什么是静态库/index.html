@@ -1,0 +1,703 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/4Cc3.github.io/img/4Cc3.png">
+  <link rel="icon" href="/4Cc3.github.io/img/4Cc3.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="4Cc3">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="静态库(static library)是编译系统的一种机制, 用以解决如下问题:    编译器如何向用户提供一些标准函数  一种方式是将标准函数全部放到一个目标文件(object file)中, 但是这么做就需要用户每次编译时采用   linux&gt; gcc main.c &#x2F;usr&#x2F;lib&#x2F;libc.o     这种方法对程序员有适当的便利, 但是缺点是每次编译时都需要把整个目标文件全部拷贝到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是静态库">
+<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/02/08/%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%99%E6%80%81%E5%BA%93/index.html">
+<meta property="og:site_name" content="4Cc3&#39;s Blog">
+<meta property="og:description" content="静态库(static library)是编译系统的一种机制, 用以解决如下问题:    编译器如何向用户提供一些标准函数  一种方式是将标准函数全部放到一个目标文件(object file)中, 但是这么做就需要用户每次编译时采用   linux&gt; gcc main.c &#x2F;usr&#x2F;lib&#x2F;libc.o     这种方法对程序员有适当的便利, 但是缺点是每次编译时都需要把整个目标文件全部拷贝到">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-6.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-7.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-8.png">
+<meta property="article:published_time" content="2024-02-08T03:03:59.000Z">
+<meta property="article:modified_time" content="2024-02-25T09:17:11.491Z">
+<meta property="article:author" content="4Cc3">
+<meta property="article:tag" content="深入理解计算机系统">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-6.png">
+  
+  
+  
+  <title>什么是静态库 - 4Cc3&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/4Cc3.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/4Cc3.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/4Cc3.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"acceleractor.github.io","root":"/4Cc3.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/4Cc3.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/4Cc3.github.io/js/utils.js" ></script>
+  <script  src="/4Cc3.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/4Cc3.github.io/">
+      <strong>学习笔记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/4Cc3.github.io/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="什么是静态库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        4Cc3
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-08 11:03" pubdate>
+          February 8, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          938 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">什么是静态库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>静态库(static library)是编译系统的一种机制, 用以解决如下问题:  </p>
+<ul>
+<li>编译器如何向用户提供一些标准函数</li>
+</ul>
+<p>一种方式是将标准函数全部放到一个目标文件(object file)中, 但是这么做就需要用户每次编译时采用  </p>
+<pre><code class="hljs">linux&gt; gcc main.c /usr/lib/libc.o   
+</code></pre>
+<p>这种方法对程序员有适当的便利, 但是缺点是每次编译时都需要把整个目标文件全部拷贝到可执行文件中去, 会增大文件的体积  </p>
+<p>其次, 对于标准函数的改变将会需要重新编译整个源文件, 费时费力。  </p>
+<p>所以，静态库的概念被提出来，以解决上述问题。   </p>
+<p>在静态库中， 不同的函数被放在不同的模块中，在连接时，连接器只复制被引用的目标模块，这样就减少了程序的占用空间。  </p>
+<p>下面给出构造静态库和使用静态库的实验  </p>
+<p><img src="/4Cc3.github.io/images/pasted-6.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="addvec.c"></p>
+<p><img src="/4Cc3.github.io/images/pasted-7.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="mulvec.c"></p>
+<p>使用如下指令编译  </p>
+<pre><code class="hljs">❯ gcc -c addvec.c multvec.c
+</code></pre>
+<p>这里的-c指令是在链接阶段停止, 只做预处理, 编译 ,汇编, 这会将程序编译成一个obj文件,在同目录下生成同名的.o文件   </p>
+<p>编译好之后运行  </p>
+<pre><code class="hljs">linux&gt; ar rcs libvector.a addvec.o mulvec.o  
+</code></pre>
+<p>就可以生成一个名为libvector.a的静态链接库文件(a的意思是archive)</p>
+<p>为了调用生成的库文件, 编写如下源程序<br><img src="/4Cc3.github.io/images/pasted-8.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful"></p>
+<p>然后在编译可执行文件时, 使用如下指令  </p>
+<pre><code class="hljs">linux&gt; gcc -c main.c
+</code></pre>
+<p>这个指令先生成一个关于main的目标文件, 但是此时并不进行连接, 也就是说无法执行</p>
+<p>然后再执行以下指令</p>
+<pre><code class="hljs">linux&gt; gcc -static -o prog main.o ./libevector.a
+</code></pre>
+<p>-static参数告诉编译器, 连接器应该构建一个完全链接的可执行文件, 它可以直接加载到内存并运行, 此选项会禁用动态库, 也就是说会把动态库中的所有东西都编译出来, 一般编译出来的东西都很大</p>
+<pre><code class="hljs">p.s:
+在linux环境下, 链接库文件的后缀为.a, 在windows平台下后缀通常为.lib 
+</code></pre>
+<p>总得来说, 先将自己写好的代码(addvec.c和multvec.c)编译为obj文件, 然后通过ar工具将可重定位文件链接为一个.a文件(静态链接库文件)  </p>
+<p>在这里还涉及到一个隐式函数的问题, 在c语言中, 如果一个函数在引用时没有声明, 那么在编辑器使用它的时候会自动为其添加隐式声明, 在链接时寻找其符号</p>
+<p>紧接着, main.c源文件在通过翻译器(cpp,ccl,as)的作用下, 生成一个main.o(可重定位目标文件), 然后再与libvector.a(我们自己构建的静态链接库), libc.a(GNU提供的标准库文件)链接, 生成一个完全链接的可执行目标文件  </p>
+<p>在此过程中, 链接器不会使用multvec.o中的内容 , 因为程序没有引用multvec.o中的符号  </p>
+<p>在使用静态链接库时, 一般需要把他们放在命令行的结尾, 并且根据依赖关系进行排序, 否则就可能会发生”undefined reference”的错误, 这种错误的发生与编辑器实现链接时的规则有关, 但是近代的gcc有没有改善这一问题暂时还不清楚, 有可能以后不会再遇到这种问题也说不定，这块的内容还没有做过实验</p>
+<p>对于上述问题的解决方法, 可以用ar工具将多个.a文件再次合并为一个单独的.a文件</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/4Cc3.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/4Cc3.github.io/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" class="print-no-link">#深入理解计算机系统</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>什么是静态库</div>
+      <div>https://acceleractor.github.io/4Cc3.github.io/2024/02/08/什么是静态库/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>4Cc3</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 8, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/4Cc3.github.io/2024/02/08/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8A%A8%E6%80%81%E5%BA%93/" title="什么是动态库">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">什么是动态库</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/4Cc3.github.io/2024/02/07/%E7%AC%A6%E5%8F%B7%E5%92%8C%E7%AC%A6%E5%8F%B7%E8%A1%A8/" title="符号和符号表">
+                        <span class="hidden-mobile">符号和符号表</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/4Cc3.github.io/js/events.js" ></script>
+<script  src="/4Cc3.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/4Cc3.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/4Cc3.github.io/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/4Cc3.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
