@@ -16,31 +16,22 @@
   <meta name="author" content="4Cc3">
   <meta name="keywords" content="">
   
-    <meta name="description" content="首先, MFC是有消息映射和消息分发队列的, 这就导致其反编译出的代码不是那么好看, 所以对于MFC这种程序的逆向就会稍微有别于普通的程序, 这里以清华MLM模型提供的示例程序为例演示MFC逆向的基本流程 (后续如果有机会的话可能会写一篇关于MLM的使用测评) 在IDA中导入MFC函数的结构体 MFC的消息映射类型都是长这个样的  消息映射入口 1234567891011struct AFX_MS">
+    <meta name="description" content="本教程致力打造一个mysql最速入门教程, 以最简介的语言教会你如何写sql语句, 适用人员包括但不限于: 即将考试的大学生, 想要了解数据库的产品经理, 想要快速入门sql注入的安全人员 Mysql中最主要的四个部分是增删改查, 而这四个部分中最主要的部分是查询的部分, 查询语句的写法是最为复杂的, 除此之外Mysql中还有一些关于权限的操作, 这里回一一进行介绍 增增加一个数据库一台主机中运行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实验: MFC逆向">
-<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/04/14/%E5%AE%9E%E9%AA%8C-MFC%E9%80%86%E5%90%91/index.html">
+<meta property="og:title" content="教程: Mysql语句">
+<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/04/22/%E6%95%99%E7%A8%8B-Mysql%E8%AF%AD%E5%8F%A5/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
-<meta property="og:description" content="首先, MFC是有消息映射和消息分发队列的, 这就导致其反编译出的代码不是那么好看, 所以对于MFC这种程序的逆向就会稍微有别于普通的程序, 这里以清华MLM模型提供的示例程序为例演示MFC逆向的基本流程 (后续如果有机会的话可能会写一篇关于MLM的使用测评) 在IDA中导入MFC函数的结构体 MFC的消息映射类型都是长这个样的  消息映射入口 1234567891011struct AFX_MS">
+<meta property="og:description" content="本教程致力打造一个mysql最速入门教程, 以最简介的语言教会你如何写sql语句, 适用人员包括但不限于: 即将考试的大学生, 想要了解数据库的产品经理, 想要快速入门sql注入的安全人员 Mysql中最主要的四个部分是增删改查, 而这四个部分中最主要的部分是查询的部分, 查询语句的写法是最为复杂的, 除此之外Mysql中还有一些关于权限的操作, 这里回一一进行介绍 增增加一个数据库一台主机中运行">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-53.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-54.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-55.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-56.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-57.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-59.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-58.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-60.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-61.png">
-<meta property="article:published_time" content="2024-04-14T10:50:46.000Z">
-<meta property="article:modified_time" content="2024-04-14T11:56:17.260Z">
+<meta property="article:published_time" content="2024-04-21T16:52:49.000Z">
+<meta property="article:modified_time" content="2024-04-21T17:19:19.413Z">
 <meta property="article:author" content="4Cc3">
+<meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-53.png">
   
   
   
-  <title>实验: MFC逆向 - 4Cc3&#39;s Blog</title>
+  <title>教程: Mysql语句 - 4Cc3&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="实验: MFC逆向"></span>
+            <span id="subtitle" data-typed-text="教程: Mysql语句"></span>
           
         </div>
 
@@ -222,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-14 18:50" pubdate>
-          April 14, 2024 pm
+        <time datetime="2024-04-22 00:52" pubdate>
+          April 22, 2024 am
         </time>
       </span>
     
@@ -234,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          837 words
+          542 words
         
       </span>
     
@@ -245,7 +236,7 @@
         
         
         
-          7 mins
+          5 mins
         
       </span>
     
@@ -282,41 +273,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">实验: MFC逆向</h1>
+            <h1 id="seo-header">教程: Mysql语句</h1>
             
             
               <div class="markdown-body">
                 
-                <p>首先, MFC是有消息映射和消息分发队列的, 这就导致其反编译出的代码不是那么好看, 所以对于MFC这种程序的逆向就会稍微有别于普通的程序, 这里以清华MLM模型提供的示例程序为例演示MFC逆向的基本流程</p>
-<p>(后续如果有机会的话可能会写一篇关于MLM的使用测评)</p>
-<h3 id="在IDA中导入MFC函数的结构体"><a href="#在IDA中导入MFC函数的结构体" class="headerlink" title="在IDA中导入MFC函数的结构体"></a>在IDA中导入MFC函数的结构体</h3><p> MFC的消息映射类型都是长这个样的</p>
-<p> 消息映射入口<br> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AFX_MSGMAP_ENTRY</span></span><br><span class="hljs-class">&#123;</span><br>  UINT nMessage;<br>  UINT nCode;<br>  UINT nID;<br>  UINT nLastID;<br>  UINT_PTR nSig;<br>  <span class="hljs-type">void</span> (*pfn)(<span class="hljs-type">void</span>);<br>&#125;;<br><br><br></code></pre></td></tr></table></figure></p>
-<p> 消息映射<br> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C"> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AFX_MSGMAP</span></span><br><span class="hljs-class">&#123;</span><br>  <span class="hljs-type">const</span> AFX_MSGMAP *(__stdcall *pfnGetBaseMap)();<br>  <span class="hljs-type">const</span> AFX_MSGMAP_ENTRY *lpEntries;<br>&#125;;<br><br> <br></code></pre></td></tr></table></figure></p>
-<p> 在view -&gt; subview 中找到localtype, 插入这两个结构体, 并同步到idb中去(这样才会对反编译的代码生效)</p>
-<p><img src="/4Cc3.github.io/images/pasted-53.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful"></p>
-<h3 id="查找人工手写的函数"><a href="#查找人工手写的函数" class="headerlink" title="查找人工手写的函数"></a>查找人工手写的函数</h3><p>这里一般是需要对MFC的函数地址进行查询, 一般是使用XSPY对桌面窗口的句柄进行查询, 但是这里XSPY不知道为啥查不出该程序的函数, 所以只能自己去手动找了</p>
-<p><img src="/4Cc3.github.io/images/pasted-54.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>这里的话只能是按照经验去找了, 这里MFC的消息映射结构一般都是这个样子的, 一大堆db数据,有很多0 ,并且时不时会出现一个地址, 一般跟在一大堆库MFC库函数后面的, 且都在rdata段</p>
-<p>点edit -&gt; struct var 给该段转换为我们刚刚插入的结构体, 一般是先插入一个AFX_MSGMAP, 然后再插入若干个AFX_MSGMAP_ENTRY 这样,这里的AFXMSGMAP起到的是一个表头的作用, 转换完结构后IDA中的代码就会变成这样  </p>
-<p><img src="/4Cc3.github.io/images/pasted-55.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>那我们此时就能看到, 转换完后的最后一个成员变量就是函数地址, 双击即可跟入了</p>
-<p>上面的操作也仅仅做演示, 因为可以看到这么转换完的函数仍然是一个MFC的库函数,并不是什么人工手写的东西</p>
-<p>这里的话往上翻一下, 可以翻到这个 </p>
-<p><img src="/4Cc3.github.io/images/pasted-56.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful"></p>
-<p>这里箭头所指的地方是IDA错误的识别了这个结构, 只识别了一半, 这里需要将它转化为db 然后再应用我们新增的MFX结构体</p>
-<p>至于怎么看出来这个地方需要转化成db的, 也只能说是经验之谈了</p>
-<p><img src="/4Cc3.github.io/images/pasted-57.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>这里转换完之后就长这样,可以跟进看里面的函数具体的内容</p>
-<p>这里的sub_7FF6A80E1B70 就是主要加密部分了</p>
-<h3 id="逻辑逆向"><a href="#逻辑逆向" class="headerlink" title="逻辑逆向"></a>逻辑逆向</h3><p>这里看下函数, 发现一个哈希加密的东西, 上微软文档看下函数的API</p>
-<p><img src="/4Cc3.github.io/images/pasted-59.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful"></p>
-<p>然后发现是MD5<br><img src="/4Cc3.github.io/images/pasted-58.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
-<p><img src="/4Cc3.github.io/images/pasted-60.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>这里有一串神秘数字,应该是key,给它md5解密一下  </p>
-<p><img src="/4Cc3.github.io/images/pasted-61.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>然后发现也是挺白给的密码,这里就逆向结束了  </p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>MFC逆向如果没有混淆或者是其它反逆向手段的话还是很好逆的, 需要注意的是记得常去搜MFC标准函数的文档, 查看这些函数的作用, 反正这个年代的IDA已经能全识别出来了, 虽然MFC已经逐步被淘汰了, MFC逆向似乎没啥企业价值了, 但是你去逆一下某些大学与其教学水平同样落后的学校的软件还是很有用的</p>
+                <p>本教程致力打造一个mysql最速入门教程, 以最简介的语言教会你如何写sql语句, 适用人员包括但不限于: 即将考试的大学生, 想要了解数据库的产品经理, 想要快速入门sql注入的安全人员</p>
+<p>Mysql中最主要的四个部分是增删改查, 而这四个部分中最主要的部分是查询的部分, 查询语句的写法是最为复杂的, 除此之外Mysql中还有一些关于权限的操作, 这里回一一进行介绍</p>
+<h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><h3 id="增加一个数据库"><a href="#增加一个数据库" class="headerlink" title="增加一个数据库"></a>增加一个数据库</h3><p>一台主机中运行一个DBMS, 也就是mysql, 一个DBMS中可以存在多个数据库, 这里介绍如何创建数据库  </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database if <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span> school;<br></code></pre></td></tr></table></figure>
 
+<p>上面的语句的意思为创建一个名为school的数据库, if not exists为可选项, 代表如果该数据库不存在才进行创建, 如果存在就不创建, 这么做的原因是防止报错  </p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p>创建一个表使用如下语句:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs sql"><br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">TABLE</span> student(<br><br>    Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">6</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">UNIQUE</span>,<br>    Sname <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">8</span>),<br>    Ssex <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>),<br>    Sage <span class="hljs-type">SMALLINT</span> <span class="hljs-keyword">check</span>(Sage <span class="hljs-operator">&gt;</span><span class="hljs-number">18</span>),<br>    Sdept <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">15</span>)  <span class="hljs-keyword">DEFAULT</span>(&quot;JSJ&quot;),<br>    <span class="hljs-keyword">PRIMARY</span> KEY(Sno)<br><br>);<br><br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">TABLE</span> course(<br>    Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>    Cname <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>),<br>    Cpno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>),<br>    Ccredit TINYINT,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (Cno) <br><br>)<br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">TABLE</span> sc(<br><br>    Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">6</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>    Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">6</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br><br>    Grade <span class="hljs-type">DECIMAL</span>(<span class="hljs-number">12</span>,<span class="hljs-number">1</span>),<br>    <span class="hljs-keyword">PRIMARY</span> KEY (Sno,Cno)<br>    <span class="hljs-keyword">CONSTRAINT</span> FK_student_sno (Sno) <span class="hljs-keyword">FOREIGN</span> KEY <span class="hljs-keyword">REFERENCES</span> student(Sno),<br><br>    <span class="hljs-keyword">CONSTRAINT</span> FK_student_Cno (Cno)  <span class="hljs-keyword">FOREIGN</span> KEY <span class="hljs-keyword">REFERENCES</span> student(Cno)<br>    <br><br>);<br><br><br><br></code></pre></td></tr></table></figure>
+<p>我们来看上面的语句, 一一进行解释</p>
+<p>首先是 not null 这个语句的意思是约束这个表的这一列不为空  </p>
+<p>unique代表这一列是独一无二的, 不能重复的</p>
+<p>创建一个表的时候, 列名的后面是这个列的数据类型,这里DECIMAL(12,1) 的意思是一个十二位的数字, 其中小数占1位  </p>
+<p>constraint 代表着建立一个约束, 后面跟着的是这个约束的名称, 名称后面是这个约束的具体内容, 像这里的sc表就建立了一个外键约束, sno列参考student里的sno列, cno列参考student的cno列, 这里还可以设定其在变化时的操作,例如 在更新时执行casecade 之类的操作</p>
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><h3 id="删除一个数据库"><a href="#删除一个数据库" class="headerlink" title="删除一个数据库"></a>删除一个数据库</h3><p>删除数据库使用语句:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> database if <span class="hljs-keyword">exists</span> schools;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><h3 id="修改一个数据库"><a href="#修改一个数据库" class="headerlink" title="修改一个数据库"></a>修改一个数据库</h3>
                 
               </div>
             
@@ -324,6 +304,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/4Cc3.github.io/tags/%E6%95%99%E7%A8%8B/" class="print-no-link">#教程</a>
+      
+    </div>
   
 </div>
 
@@ -333,8 +320,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>实验: MFC逆向</div>
-      <div>https://acceleractor.github.io/4Cc3.github.io/2024/04/14/实验-MFC逆向/</div>
+      <div>教程: Mysql语句</div>
+      <div>https://acceleractor.github.io/4Cc3.github.io/2024/04/22/教程-Mysql语句/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +333,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 14, 2024</div>
+          <div>April 22, 2024</div>
         </div>
       
       
@@ -378,9 +365,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/04/22/%E6%95%99%E7%A8%8B-Mysql%E8%AF%AD%E5%8F%A5/" title="教程: Mysql语句">
+                      <a href="/4Cc3.github.io/2024/04/28/WriteUp-2024%E8%93%9D%E6%A1%A5%E6%9D%AF/" title="WriteUp: 2024蓝桥杯">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">教程: Mysql语句</span>
+                        <span class="hidden-mobile">WriteUp: 2024蓝桥杯</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -388,8 +375,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/04/08/C-%E5%AD%A6%E4%B9%A0/" title="C#学习">
-                        <span class="hidden-mobile">C#学习</span>
+                      <a href="/4Cc3.github.io/2024/04/14/%E5%AE%9E%E9%AA%8C-MFC%E9%80%86%E5%90%91/" title="实验: MFC逆向">
+                        <span class="hidden-mobile">实验: MFC逆向</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

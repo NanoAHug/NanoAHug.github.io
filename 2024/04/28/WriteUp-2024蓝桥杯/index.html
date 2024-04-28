@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/4Cc3.github.io/img/4Cc3.png">
+  <link rel="icon" href="/4Cc3.github.io/img/4Cc3.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="4Cc3">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="记录一下这一场比赛, 说实话协会内对蓝桥杯还是很抵触的 , 但是为了协会的发展和社团的转正也是没有办法, 毕竟学校对蓝桥杯的认可度比DEFCON都高，如果没有什么成绩协会肯定是办不下去的，这里简单记录一下蓝桥杯的两道逆向   顺便一提，蓝桥杯没有web题还是非常爽的，爱了 happytime看一下文件格式，是一个ELF格式的文件，题目提示说是个TEA，但是看了下代码实际上并不是一个标准的TEA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WriteUp: 2024蓝桥杯">
+<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/04/28/WriteUp-2024%E8%93%9D%E6%A1%A5%E6%9D%AF/index.html">
+<meta property="og:site_name" content="4Cc3&#39;s Blog">
+<meta property="og:description" content="记录一下这一场比赛, 说实话协会内对蓝桥杯还是很抵触的 , 但是为了协会的发展和社团的转正也是没有办法, 毕竟学校对蓝桥杯的认可度比DEFCON都高，如果没有什么成绩协会肯定是办不下去的，这里简单记录一下蓝桥杯的两道逆向   顺便一提，蓝桥杯没有web题还是非常爽的，爱了 happytime看一下文件格式，是一个ELF格式的文件，题目提示说是个TEA，但是看了下代码实际上并不是一个标准的TEA">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-62.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-64.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-65.png">
+<meta property="article:published_time" content="2024-04-28T11:53:07.000Z">
+<meta property="article:modified_time" content="2024-04-28T14:03:57.542Z">
+<meta property="article:author" content="4Cc3">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-62.png">
+  
+  
+  
+  <title>WriteUp: 2024蓝桥杯 - 4Cc3&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/4Cc3.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/4Cc3.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/4Cc3.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"acceleractor.github.io","root":"/4Cc3.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/4Cc3.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/4Cc3.github.io/js/utils.js" ></script>
+  <script  src="/4Cc3.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/4Cc3.github.io/">
+      <strong>学习笔记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/4Cc3.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/4Cc3.github.io/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="WriteUp: 2024蓝桥杯"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        4Cc3
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-28 19:53" pubdate>
+          April 28, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">WriteUp: 2024蓝桥杯</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>记录一下这一场比赛, 说实话协会内对蓝桥杯还是很抵触的 , 但是为了协会的发展和社团的转正也是没有办法, 毕竟学校对蓝桥杯的认可度比DEFCON都高，如果没有什么成绩协会肯定是办不下去的，这里简单记录一下蓝桥杯的两道逆向  </p>
+<p>顺便一提，蓝桥杯没有web题还是非常爽的，爱了</p>
+<h2 id="happytime"><a href="#happytime" class="headerlink" title="happytime"></a>happytime</h2><p>看一下文件格式，是一个ELF格式的文件，题目提示说是个TEA，但是看了下代码实际上并不是一个标准的TEA</p>
+<p><img src="/4Cc3.github.io/images/pasted-62.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>这里看到没有去除符号表, 函数也是一眼就看出来哪个是主要逻辑了  </p>
+<p>看到cry里面, 这里简单对变量进行了命名  </p>
+<p>这里对该函数仔细分析一下, 函数主要是做一个循环, 循环次数是415 &#x2F; length + 114次, 可以看到这里也是出题人的恶趣味, 然后就是sum每次都是减一个很经典的数字, 这个用findcrypto也是能识别出来是TEA的。  </p>
+<p>然后就是函数具体的加密部分了，这里的核心加密语句为：<br><code>*v1 += ((next ^ sum) + (lastv ^ *(_DWORD *)(4LL * (index ^ i &amp; 3) + key))) ^ (((4 * next) ^ (lastv &gt;&gt; 5))+ ((next &gt;&gt; 3) ^(16 * lastv)));</code>  </p>
+<p>这里可以做个实验, 这里对v1的运算是可逆的, 也就是说原本加了多少数, 如果想还原密文的话减掉那个数就可以了  </p>
+<p>然后再看, 每一轮运算里是有一个for循环, for结束后又执行了一个语句 </p>
+<p><code>    *v2 += ((*input ^ sum) + (lastv ^ *(_DWORD *)(4LL * (index ^ i &amp; 3) + key))) ^ (((4 * *input) ^ (lastv &gt;&gt; 5)) + ((*input &gt;&gt; 3) ^ (16 * lastv)));</code></p>
+<p>这个语句和上一条语句可以看到一些差距, 最主要的就是input的取值, 一个是取input[i+1], 另一个是取input[0], 这里就可以分析出, 一轮加密干的事情是用input[i+1]给input[i]加密, 当i等于10时(也就是length - 1 ), 此时由于并不存在一个input[i+1], 所以就需要使用input[0]来给input[i]做加密, 还有一个需要注意的是lastv这个值, lastv初始值是input[length-1], 也就是input的最后一个值, 进入一轮加密后lastv在每一轮加密后变为当前的值 换句话说, 每一轮的加密都需要用input[i-1]和input[i+1]来给input[i]做加密. 那么逻辑分析出来, 逆向就很容易了, 对于每一轮的操作, 首先要先将lastv置为input[length-2], next置为input[0], 将input[i-1]恢复出来, 然后再进入一个从length -2 到 0 的循环, 这里每一轮循环使用input[i-1]和input[i+1]来恢复input[i], 当i等于0的时候, lastv应该是input[length-1], 这里需要注意一下  </p>
+<p>然后就是最坑爹的地方了, 请看图  </p>
+<p><img src="/4Cc3.github.io/images/pasted-64.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>当时比赛的时候没做出来主要是栽在这了, 这里调用的时候往里头传的这个key是一个int64的数, 而调用的时候直接是把key作为一个64位的数传进来了, 也就是说这里的key其实就是一个整数而不是一个指针类型, 所以在IDA中使用这个key的时候使用了类型转换将其转换成了int32类型(也就是DWORD) 所以当时写脚本的时候没注意类型,直接从ida里面复制的, 所以就导致没把flag整出来, 太蠢了  </p>
+<p>剩下一个就是端序的问题, 这题好像默认就是小端绪, 所以直接把密文复制出来从最低位输出就能出flag  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><code class="hljs C++"><br><span class="hljs-comment">//decry.cpp</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> length = <span class="hljs-number">11</span>;<br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> input[<span class="hljs-number">12</span>];<br><span class="hljs-type">int</span> key[<span class="hljs-number">4</span>];<br><span class="hljs-type">int</span> index;<br><span class="hljs-type">int</span> turn = <span class="hljs-number">415</span> / length + <span class="hljs-number">114</span>;<br><br><br><br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> sum = <span class="hljs-number">1387842591</span> ;<br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> lastv = input[length - <span class="hljs-number">2</span>];<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br><br>	input[<span class="hljs-number">0</span>] = <span class="hljs-number">1208664588</span>;<br>	input[<span class="hljs-number">1</span>] = <span class="hljs-number">0xCE9037F2</span>;<br>	input[<span class="hljs-number">2</span>] = <span class="hljs-number">0x8C212018</span>;<br>	input[<span class="hljs-number">3</span>] = <span class="hljs-number">244490637</span>;<br>	input[<span class="hljs-number">4</span>] = <span class="hljs-number">0xA4035274</span>;<br>	input[<span class="hljs-number">5</span>] = <span class="hljs-number">611560113</span>;<br>	input[<span class="hljs-number">6</span>] = <span class="hljs-number">0xA9EFDB58</span>;<br>	input[<span class="hljs-number">7</span>] = <span class="hljs-number">0xA52CC5C8</span>;<br>	input[<span class="hljs-number">8</span>] = <span class="hljs-number">0xE432CB51</span>;<br>	input[<span class="hljs-number">9</span>] = <span class="hljs-number">3494810147</span>;<br>	input[<span class="hljs-number">10</span>] = <span class="hljs-number">1875931283</span>;<br>	cout&lt;&lt;(<span class="hljs-type">int</span>)input[<span class="hljs-number">4</span>]&lt;&lt;endl;<br>	key[<span class="hljs-number">0</span>] = <span class="hljs-number">2036950869</span>;<br>	key[<span class="hljs-number">1</span>] = <span class="hljs-number">1731489644</span>;<br>	key[<span class="hljs-number">2</span>] = <span class="hljs-number">1763906097</span>;<br>	key[<span class="hljs-number">3</span>] = <span class="hljs-number">1600602673</span>;<br>	<br><br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=turn;j++)&#123;<br>		lastv = input[length - <span class="hljs-number">2</span>];<br>		<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> *v1,next;<br>		index = (sum &gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">3</span>;<br>		v1 = &amp;input[length - <span class="hljs-number">1</span>];<br>		<br>		<span class="hljs-type">int</span> l1=(index ^ <span class="hljs-number">10</span> &amp; <span class="hljs-number">3</span>);<br>		<br>		*v1 -= ((*input ^ sum) + (lastv ^key[l1] )) ^ (((<span class="hljs-number">4</span> * *input) ^ (lastv &gt;&gt; <span class="hljs-number">5</span>))+ ((*input &gt;&gt; <span class="hljs-number">3</span>) ^ (<span class="hljs-number">16</span> * lastv)));<br>		<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=length <span class="hljs-number">-2</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>			<span class="hljs-keyword">if</span>(i!=<span class="hljs-number">0</span>)&#123;<br>				lastv = input[i<span class="hljs-number">-1</span>];<br>			&#125;<br>			<span class="hljs-keyword">else</span>&#123;<br>				lastv = input[length<span class="hljs-number">-1</span>];<br>			&#125;<br>			next = input[i+<span class="hljs-number">1</span>];<br>			v1 = &amp;input[i];<br><br>			<br>			<br>			<span class="hljs-type">int</span> l=(index ^ i &amp; <span class="hljs-number">3</span>);<br>			*v1 -= ((next ^ sum) + (lastv ^ key[l])) ^ (((<span class="hljs-number">4</span> * next) ^ (lastv &gt;&gt; <span class="hljs-number">5</span>))+ ((next &gt;&gt; <span class="hljs-number">3</span>) ^ (<span class="hljs-number">16</span> * lastv)));<br>			<br>		 <br>		&#125;<br>		<br>		<br>		<br>		sum+= <span class="hljs-number">0x61C88647</span>;<br>		<br>	&#125;	<br>	<br><br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">10</span>;i++)&#123;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">4</span>;j++)&#123;<br>			cout&lt;&lt;(<span class="hljs-type">char</span>)((input[i]&gt;&gt;(<span class="hljs-number">8</span>*j))&amp;<span class="hljs-number">0xff</span>);<br>		&#125;<br>	&#125;<br>	cout&lt;&lt;sum&lt;&lt;endl;<br>	<br>	<br>	<br>&#125;<br><br><br><br><br><br>```C++  加密脚本, 推测源代码就长这样<br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _DWORD unsigned int </span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">int</span> length = <span class="hljs-number">11</span>;<br><br>__int64 key[<span class="hljs-number">4</span>]; <span class="hljs-comment">// [rsp+10h] [rbp-F0h] BYREF</span><br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> input[<span class="hljs-number">12</span>]; <span class="hljs-comment">// [rsp+20h] [rbp-E0h]</span><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<br>	key[<span class="hljs-number">0</span>] = <span class="hljs-number">2036950869</span>;<br>	key[<span class="hljs-number">1</span>] = <span class="hljs-number">1731489644</span>;<br>	key[<span class="hljs-number">2</span>] = <span class="hljs-number">1763906097</span>;<br>	key[<span class="hljs-number">3</span>] = <span class="hljs-number">1600602673</span>;<br>	<br>	input[<span class="hljs-number">0</span>] = <span class="hljs-number">0x666c6167</span>;<br>	input[<span class="hljs-number">1</span>] = <span class="hljs-number">0x7b787878</span>;<br>	input[<span class="hljs-number">2</span>] = <span class="hljs-number">0x78787878</span>;<br>	input[<span class="hljs-number">3</span>] = <span class="hljs-number">0x78787878</span>;<br>	input[<span class="hljs-number">4</span>] = <span class="hljs-number">0x78787878</span>;<br>	input[<span class="hljs-number">5</span>] = <span class="hljs-number">0x78787878</span>;<br>	input[<span class="hljs-number">6</span>] = <span class="hljs-number">0x78787878</span>;<br>	input[<span class="hljs-number">7</span>] = <span class="hljs-number">0x78787878</span>;<br>	input[<span class="hljs-number">8</span>] = <span class="hljs-number">0x78787878</span>;<br>	input[<span class="hljs-number">9</span>] = <span class="hljs-number">0x78787878</span>;<br>	input[<span class="hljs-number">10</span>] = <span class="hljs-number">0x7878787d</span>;<br>	<br>	<br><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> *v1; <span class="hljs-comment">// rax</span><br>	_DWORD *v2; <span class="hljs-comment">// rax</span><br>	__int64 result; <span class="hljs-comment">// rax</span><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> lastv; <span class="hljs-comment">// [rsp+20h] [rbp-18h]</span><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> sum; <span class="hljs-comment">// [rsp+24h] [rbp-14h]</span><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> i; <span class="hljs-comment">// [rsp+28h] [rbp-10h]</span><br>	<span class="hljs-type">int</span> turn; <span class="hljs-comment">// [rsp+2Ch] [rbp-Ch]</span><br>	<span class="hljs-type">int</span> index; <span class="hljs-comment">// [rsp+30h] [rbp-8h]</span><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> next;<br>	turn = <span class="hljs-number">415</span> / length + <span class="hljs-number">114</span>;<br>	turn =<span class="hljs-number">3</span>;<br>	sum = <span class="hljs-number">0</span>;<br>	lastv = input[length - <span class="hljs-number">1</span>];<br>	<span class="hljs-keyword">do</span><br>	&#123;<br>		sum -= <span class="hljs-number">0x61C88647</span>;<br>		index = (sum &gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">3</span>;<br>		<span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt; length - <span class="hljs-number">1</span>; ++i )<br>		&#123;<br>			next = input[i + <span class="hljs-number">1</span>];<br>			v1 = &amp;input[i];<br>			<span class="hljs-keyword">if</span>(i==<span class="hljs-number">9</span>)&#123;<br>				cout&lt;&lt;key[(index ^ i &amp; <span class="hljs-number">3</span>)]&lt;&lt;endl;<br>				cout&lt;&lt;( ((*input ^ sum) + (lastv ^ key[(index ^ i &amp; <span class="hljs-number">3</span>)])) ^ (((<span class="hljs-number">4</span> * *input) ^ (lastv &gt;&gt; <span class="hljs-number">5</span>))+ ((*input &gt;&gt; <span class="hljs-number">3</span>) ^ (<span class="hljs-number">16</span> * lastv))))&lt;&lt;endl;<br>				<br>			&#125;<br> 			*v1 += ((next ^ sum) + (lastv ^ key[(index ^ i &amp; <span class="hljs-number">3</span>)])) ^ (((<span class="hljs-number">4</span> * next) ^ (lastv &gt;&gt; <span class="hljs-number">5</span>))+ ((next &gt;&gt; <span class="hljs-number">3</span>) ^ (<span class="hljs-number">16</span> * lastv)));<br>			lastv = *v1;<br>			<br>		<br>		&#125;<br>		v2 = &amp;input[length - <span class="hljs-number">1</span>];<br>		cout&lt;&lt;(index ^ i &amp; <span class="hljs-number">3</span>)&lt;&lt;endl;<br>		cout&lt;&lt;*(_DWORD *)(<span class="hljs-number">4LL</span> * (index ^ i &amp; <span class="hljs-number">3</span>) + key)&lt;&lt;endl;<br>		*v2 += ((*input ^ sum) + (lastv ^ key[(index ^ i &amp; <span class="hljs-number">3</span>)   ])) ^ (((<span class="hljs-number">4</span> * *input) ^ (lastv &gt;&gt; <span class="hljs-number">5</span>))+ ((*input &gt;&gt; <span class="hljs-number">3</span>) ^ (<span class="hljs-number">16</span> * lastv)));<br>		result = (<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>)*v2;<br>		lastv = result;<br>		--turn;<br>	&#125;<br>	<span class="hljs-keyword">while</span> ( turn );<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">10</span>;i++)&#123;<br>		<br>		cout&lt;&lt;<span class="hljs-string">&quot;input[&quot;</span>&lt;&lt;i&lt;&lt;<span class="hljs-string">&quot;] = &quot;</span>&lt;&lt;input[i]&lt;&lt;<span class="hljs-string">&quot;;&quot;</span>&lt;&lt;endl;<br>		<br>	&#125;<br>	cout&lt;&lt;sum&lt;&lt;endl;<br>	<br>&#125;<br><br><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="RC4"><a href="#RC4" class="headerlink" title="RC4"></a>RC4</h2><p>白给的题, 动态调试一下, flag是明文的  </p>
+<p><img src="/4Cc3.github.io/images/pasted-65.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>flag{12601b2b-2f1e-468a-ae43-92391ff76ef3}  </p>
+<p>蓝桥杯虽然收费, 还挺贵, 但至少打着不坐牢, 新手可以打这个练练手, 没啥不好的</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>WriteUp: 2024蓝桥杯</div>
+      <div>https://acceleractor.github.io/4Cc3.github.io/2024/04/28/WriteUp-2024蓝桥杯/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>4Cc3</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 28, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/4Cc3.github.io/2024/04/22/%E6%95%99%E7%A8%8B-Mysql%E8%AF%AD%E5%8F%A5/" title="教程: Mysql语句">
+                        <span class="hidden-mobile">教程: Mysql语句</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/4Cc3.github.io/js/events.js" ></script>
+<script  src="/4Cc3.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/4Cc3.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/4Cc3.github.io/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/4Cc3.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
