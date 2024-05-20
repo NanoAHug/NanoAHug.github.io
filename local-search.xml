@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>页表机制</title>
+    <link href="/4Cc3.github.io/2024/05/19/%E9%A1%B5%E8%A1%A8%E6%9C%BA%E5%88%B6/"/>
+    <url>/4Cc3.github.io/2024/05/19/%E9%A1%B5%E8%A1%A8%E6%9C%BA%E5%88%B6/</url>
+    
+    <content type="html"><![CDATA[<p>本节参考《软件调试》卷一 2.7节  </p><p>操作系统在创建进程时， 就会为这个进程创建页表，页表是进程空间的物理基础</p><h2 id="32位经典分页"><a href="#32位经典分页" class="headerlink" title="32位经典分页"></a>32位经典分页</h2><p>  此处的经典是指没有开启PAE的分页模式，在该模式下，页表结构分为两级，第一级称为页目录表（Page Driectory），第二级称为页表（Page Table）。<br>  PD是一个存放页目录表项（Page Directory Entry） 的线性表，<em>每个PD占4KB</em>的内存， <em>每个PDE占32bit</em>， 所以一个PD最多可以有1024个PDE。</p><p><img src="/4Cc3.github.io/images/pasted-72.png" alt="页表与页目录表的关系"></p><p> PDE可以用于指向下一个PD，格式如下   </p><p><img src="/4Cc3.github.io/images/pasted-68.png" alt="指向PT的PDE的格式">  </p><p>当然也可以用于指向一个4MB的大内存页  </p><p><img src="/4Cc3.github.io/images/pasted-69.png" alt="指向4MB内存页的PDE的格式">  </p><p>而页表(Page Table)是用来存放页表表项(Page Table Entry)的线性表, 每个PT占4KB, 每个PTE占32bit, PTE的具体格式如下  </p><p><img src="/4Cc3.github.io/images/pasted-71.png" alt="PTE格式">  </p><p>现在来看CPU是如何将一个32bit的线性地址翻译为32bit的物理地址的  </p><ol><li><p>通过CR3寄存器定位到PD的起始地址,取该线性地址的高10bit作为索引选取PDE  </p></li><li><p>判断PDE的 PS位, 如果为1, 代表这个PDE指向一个4MB的大内存页, PDE的高10bit便是4MB内存页的基地址的高10位, 该线性地址的低22bit便是页内偏移, 将二者结合到一起就是物理地址了。如果PS为0，那么根据PDE中高20位定位到PT  </p></li><li><p>取该线性地址的12bit到21bit作为索引选取PT的一个表项，也就是PTE。  </p></li><li><p>取出PTE的高20位</p></li><li><p>取该线性地址的低12bit作为页内偏移与上一步的地址相加便能得到物理地址</p></li></ol><p>现在以软件调试中给出的实验材料进行实验  sdbgvola\dumps\xpsp3nop  </p><p><img src="/4Cc3.github.io/images/pasted-73.png" alt="upload successful">  </p><p>以这里的f8c2e04d为例, 该地址为线性地址  </p><p><img src="/4Cc3.github.io/images/pasted-74.png" alt="upload successful">  </p><p>转化为二进制后长这样  </p><p><img src="/4Cc3.github.io/images/pasted-75.png" alt="upload successful">  </p><p>然后把高十位的值计算出来, 为PDE的索引  </p><p><img src="/4Cc3.github.io/images/pasted-76.png" alt="upload successful">  </p><p>把中间十位算出来 为PT的索引</p><p>最后低十位的是04d 是页内偏移  </p><p><img src="/4Cc3.github.io/images/pasted-77.png" alt="upload successful"></p><p>然后可以看cr3这个寄存器中的内容, 其中存放的是PD的基地址(cr3 的高20为就是PD基地址的高20位, 低12位为0)</p><p><img src="/4Cc3.github.io/images/pasted-78.png" alt="upload successful">  </p><p>然后这里我们按照上面的步骤来, 首先要找到PDE, 也即是说, 这里是需要用ca83000+3e3*4 来找到对应的PDE(因为前面说过, 线性地址的高10位是PDE的索引, 类似c语言中数组的下标, 而每一个PDE是32bit,也就是4byte,所以这里需要用这个索引值乘来找到对应的位置, 这里想不通的同学可以回忆一下, 在计算机中, 一个地址对应存储的是一个字节)   </p><p>这里计算完成之后, 结果位0ca83f8c ,其对应地址存储的是0101a163, 这个就是我们要找的PDE  </p><p>PDE的高20bit为PT起始的高20bit, 也就是说, 我们要用0101a000来作为PD基地址, 而PDE的低12bit为页表属性, 这里其实关注一下它是否指向的是4MB大内存页就可以了, 如果不是就直接去找它对应的PTE, PTE也是4byte, 所以找法是0x0101a000+4*2e,这里的2e就是线性地址的中间十位  </p><p><img src="/4Cc3.github.io/images/pasted-79.png" alt="upload successful">  </p><p>然后可以看到这里PTE中存储的内容是0d566163。PTE高20bit指向的是内存页起始地址的高20bit, 即目标地址所在的内存页的基地址为0x0d566000, 低12bit代表的是内存也的属性  </p><p>这里0x0d566000加上前面线性地址的低十位（页内偏移）计算出来的就是真实的物理地址了，结果为0d56604d</p><p><img src="/4Cc3.github.io/images/pasted-80.png" alt="upload successful">  </p><p>在windbg中使用!pte可以直接看到这些结果, PTEcontains中高20位就是内存页的起始地址, 也就是下面的pfn的内容, pfn加上线性地址的低12位就可以定位到物理地址了</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>实验: flask框架连接mysql数据库</title>
     <link href="/4Cc3.github.io/2024/05/09/%E5%AE%9E%E9%AA%8C-flask%E6%A1%86%E6%9E%B6%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <url>/4Cc3.github.io/2024/05/09/%E5%AE%9E%E9%AA%8C-flask%E6%A1%86%E6%9E%B6%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93/</url>

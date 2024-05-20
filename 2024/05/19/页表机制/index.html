@@ -16,23 +16,34 @@
   <meta name="author" content="4Cc3">
   <meta name="keywords" content="">
   
-    <meta name="description" content="准备工作首先安装Flask, PyMySQL,Flask-SQLalchemy  ,这些通过pip都可以直接安装   配置工作首先需要一个URI的配置,以下是URI连接时用到的配置信息      占位符 说明    dialect 数据库，如：sqlite、mysql、oracle等   driver 数据库驱动，如前面安装的：pymysql   username 登录数据库用户名   passw">
+    <meta name="description" content="本节参考《软件调试》卷一 2.7节   操作系统在创建进程时， 就会为这个进程创建页表，页表是进程空间的物理基础 32位经典分页  此处的经典是指没有开启PAE的分页模式，在该模式下，页表结构分为两级，第一级称为页目录表（Page Driectory），第二级称为页表（Page Table）。  PD是一个存放页目录表项（Page Directory Entry） 的线性表，每个PD占4KB的内存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实验: flask框架连接mysql数据库">
-<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/05/09/%E5%AE%9E%E9%AA%8C-flask%E6%A1%86%E6%9E%B6%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:title" content="页表机制">
+<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/05/19/%E9%A1%B5%E8%A1%A8%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
-<meta property="og:description" content="准备工作首先安装Flask, PyMySQL,Flask-SQLalchemy  ,这些通过pip都可以直接安装   配置工作首先需要一个URI的配置,以下是URI连接时用到的配置信息      占位符 说明    dialect 数据库，如：sqlite、mysql、oracle等   driver 数据库驱动，如前面安装的：pymysql   username 登录数据库用户名   passw">
+<meta property="og:description" content="本节参考《软件调试》卷一 2.7节   操作系统在创建进程时， 就会为这个进程创建页表，页表是进程空间的物理基础 32位经典分页  此处的经典是指没有开启PAE的分页模式，在该模式下，页表结构分为两级，第一级称为页目录表（Page Driectory），第二级称为页表（Page Table）。  PD是一个存放页目录表项（Page Directory Entry） 的线性表，每个PD占4KB的内存">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-66.png">
-<meta property="article:published_time" content="2024-05-09T07:01:07.000Z">
-<meta property="article:modified_time" content="2024-05-09T07:29:39.439Z">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-72.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-68.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-69.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-71.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-73.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-74.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-75.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-76.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-77.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-78.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-79.png">
+<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-80.png">
+<meta property="article:published_time" content="2024-05-19T11:42:53.000Z">
+<meta property="article:modified_time" content="2024-05-20T00:58:00.951Z">
 <meta property="article:author" content="4Cc3">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-66.png">
+<meta name="twitter:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-72.png">
   
   
   
-  <title>实验: flask框架连接mysql数据库 - 4Cc3&#39;s Blog</title>
+  <title>页表机制 - 4Cc3&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +209,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="实验: flask框架连接mysql数据库"></span>
+            <span id="subtitle" data-typed-text="页表机制"></span>
           
         </div>
 
@@ -214,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-09 15:01" pubdate>
-          May 9, 2024 pm
+        <time datetime="2024-05-19 19:42" pubdate>
+          May 19, 2024 pm
         </time>
       </span>
     
@@ -226,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          533 words
+          937 words
         
       </span>
     
@@ -237,7 +248,7 @@
         
         
         
-          5 mins
+          8 mins
         
       </span>
     
@@ -274,61 +285,55 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">实验: flask框架连接mysql数据库</h1>
+            <h1 id="seo-header">页表机制</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>首先安装Flask, PyMySQL,Flask-SQLalchemy  ,这些通过pip都可以直接安装  </p>
-<h3 id="配置工作"><a href="#配置工作" class="headerlink" title="配置工作"></a>配置工作</h3><p>首先需要一个URI的配置,以下是URI连接时用到的配置信息  </p>
-<table>
-<thead>
-<tr>
-<th align="center">占位符</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">dialect</td>
-<td align="center">数据库，如：sqlite、mysql、oracle等</td>
-</tr>
-<tr>
-<td align="center">driver</td>
-<td align="center">数据库驱动，如前面安装的：pymysql</td>
-</tr>
-<tr>
-<td align="center">username</td>
-<td align="center">登录数据库用户名</td>
-</tr>
-<tr>
-<td align="center">password</td>
-<td align="center">登录数据库密码</td>
-</tr>
-<tr>
-<td align="center">host</td>
-<td align="center">数据库部署 IP 地址</td>
-</tr>
-<tr>
-<td align="center">port</td>
-<td align="center">端口</td>
-</tr>
-<tr>
-<td align="center">database</td>
-<td align="center">数据库库名</td>
-</tr>
-</tbody></table>
-<p>而URI字符串构造形式为<br><code>dialect+driver://username:password@host:port/database</code>  </p>
-<p>在Flask类中, 还有一个对象叫config对象, 该属性是一个dict, 需要进行相应的配置使其生效<br>例如</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python">DB_URI = <span class="hljs-string">&#x27;mysql+pymysql://root:passwd@localhost:3306/school&#x27;</span><br>app.config[<span class="hljs-string">&#x27;SQLALCHEMY_DATABASE_URI&#x27;</span>] = DB_URI<br><span class="hljs-comment">#数据库追踪</span><br>app.config[<span class="hljs-string">&#x27;SQLALCHEMY_TRACK_MODIFICATIONS&#x27;</span>] = <span class="hljs-literal">False</span><br><span class="hljs-comment">#显示底层语句</span><br>app.config[<span class="hljs-string">&#x27;SQLALCHEMY_ECHO&#x27;</span>] = <span class="hljs-literal">True</span><br><br>```  <br><br>这里的config具体配置还可以从JSON文件导入, 实现配置分离  <br><br>```python<br><span class="hljs-keyword">import</span> json<br>app.config.from_file(<span class="hljs-string">&quot;config.json&quot;</span>, load=json.load)<br>```  <br><br><br><span class="hljs-comment">### 建立上下文 ###  </span><br><br><br>这里好像是出于程序安全性考虑, 连接到数据库必须存在上下文, 所以需要一个基本的flask网页  <br><br>向代码中添加index控制器  <br><br>```python<br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">index</span>():<br>    sql =  text(<span class="hljs-string">&#x27;SELECT * FROM school.course;&#x27;</span>)<br>    result = db.session.execute(sql)<br>    courses = result.fetchall()<br>    <span class="hljs-built_in">print</span>(courses)<br>    <span class="hljs-keyword">return</span> flask.render_template(<span class="hljs-string">&#x27;index.html&#x27;</span>, courses=courses)<br><br></code></pre></td></tr></table></figure>
-
-
-<p>在程序根目录下的templates文件夹中创建index.html, 随便写点东西, 保证文件存在就行  </p>
-<p>随后就可以测试了   </p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>完整代码  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> flask<br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br><span class="hljs-keyword">from</span> flask_sqlalchemy <span class="hljs-keyword">import</span> SQLAlchemy<br><span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> text<br>app = Flask(__name__)<br>DB_URI = <span class="hljs-string">&#x27;mysql+pymysql://root:passwd@localhost:3306/school&#x27;</span><br>app.config[<span class="hljs-string">&#x27;SQLALCHEMY_DATABASE_URI&#x27;</span>] = DB_URI<br>app.config[<span class="hljs-string">&#x27;SQLALCHEMY_TRACK_MODIFICATIONS&#x27;</span>] = <span class="hljs-literal">False</span><br>app.config[<span class="hljs-string">&#x27;SQLALCHEMY_ECHO&#x27;</span>] = <span class="hljs-literal">True</span><br>db = SQLAlchemy(app)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">index</span>():<br>    sql =  text(<span class="hljs-string">&#x27;SELECT * FROM school.course;&#x27;</span>)<br>    result = db.session.execute(sql)<br>    courses = result.fetchall()<br>    <span class="hljs-built_in">print</span>(courses)<br>    <span class="hljs-keyword">return</span> flask.render_template(<span class="hljs-string">&#x27;index.html&#x27;</span>, courses=courses)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">with</span> app.app_context():<br>        app.run()<br><br><br></code></pre></td></tr></table></figure>
-<p>运行之后, 就可以在终端中查看数据库的输出了, 这里是因为我本地已经创建过一个school数据库, 里面有一些表(做学校数据库实验的时候搞的) 所以在复现本实验的时候需要自己创建一个数据库,并修改查询语句来保证程序正确运行  </p>
-<p><img src="/4Cc3.github.io/images/pasted-66.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="运行结果">  </p>
-<p>可以看到console中输出了查询的结果</p>
+                <p>本节参考《软件调试》卷一 2.7节  </p>
+<p>操作系统在创建进程时， 就会为这个进程创建页表，页表是进程空间的物理基础</p>
+<h2 id="32位经典分页"><a href="#32位经典分页" class="headerlink" title="32位经典分页"></a>32位经典分页</h2><p>  此处的经典是指没有开启PAE的分页模式，在该模式下，页表结构分为两级，第一级称为页目录表（Page Driectory），第二级称为页表（Page Table）。<br>  PD是一个存放页目录表项（Page Directory Entry） 的线性表，<em>每个PD占4KB</em>的内存， <em>每个PDE占32bit</em>， 所以一个PD最多可以有1024个PDE。</p>
+<p><img src="/4Cc3.github.io/images/pasted-72.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="页表与页目录表的关系"></p>
+<p> PDE可以用于指向下一个PD，格式如下   </p>
+<p><img src="/4Cc3.github.io/images/pasted-68.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="指向PT的PDE的格式">  </p>
+<p>当然也可以用于指向一个4MB的大内存页  </p>
+<p><img src="/4Cc3.github.io/images/pasted-69.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="指向4MB内存页的PDE的格式">  </p>
+<p>而页表(Page Table)是用来存放页表表项(Page Table Entry)的线性表, 每个PT占4KB, 每个PTE占32bit, PTE的具体格式如下  </p>
+<p><img src="/4Cc3.github.io/images/pasted-71.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="PTE格式">  </p>
+<p>现在来看CPU是如何将一个32bit的线性地址翻译为32bit的物理地址的  </p>
+<ol>
+<li><p>通过CR3寄存器定位到PD的起始地址,取该线性地址的高10bit作为索引选取PDE  </p>
+</li>
+<li><p>判断PDE的 PS位, 如果为1, 代表这个PDE指向一个4MB的大内存页, PDE的高10bit便是4MB内存页的基地址的高10位, 该线性地址的低22bit便是页内偏移, 将二者结合到一起就是物理地址了。如果PS为0，那么根据PDE中高20位定位到PT  </p>
+</li>
+<li><p>取该线性地址的12bit到21bit作为索引选取PT的一个表项，也就是PTE。  </p>
+</li>
+<li><p>取出PTE的高20位</p>
+</li>
+<li><p>取该线性地址的低12bit作为页内偏移与上一步的地址相加便能得到物理地址</p>
+</li>
+</ol>
+<p>现在以软件调试中给出的实验材料进行实验  sdbgvola\dumps\xpsp3nop  </p>
+<p><img src="/4Cc3.github.io/images/pasted-73.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>以这里的f8c2e04d为例, 该地址为线性地址  </p>
+<p><img src="/4Cc3.github.io/images/pasted-74.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>转化为二进制后长这样  </p>
+<p><img src="/4Cc3.github.io/images/pasted-75.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>然后把高十位的值计算出来, 为PDE的索引  </p>
+<p><img src="/4Cc3.github.io/images/pasted-76.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>把中间十位算出来 为PT的索引</p>
+<p>最后低十位的是04d 是页内偏移  </p>
+<p><img src="/4Cc3.github.io/images/pasted-77.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful"></p>
+<p>然后可以看cr3这个寄存器中的内容, 其中存放的是PD的基地址(cr3 的高20为就是PD基地址的高20位, 低12位为0)</p>
+<p><img src="/4Cc3.github.io/images/pasted-78.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>然后这里我们按照上面的步骤来, 首先要找到PDE, 也即是说, 这里是需要用ca83000+3e3*4 来找到对应的PDE(因为前面说过, 线性地址的高10位是PDE的索引, 类似c语言中数组的下标, 而每一个PDE是32bit,也就是4byte,所以这里需要用这个索引值乘来找到对应的位置, 这里想不通的同学可以回忆一下, 在计算机中, 一个地址对应存储的是一个字节)   </p>
+<p>这里计算完成之后, 结果位0ca83f8c ,其对应地址存储的是0101a163, 这个就是我们要找的PDE  </p>
+<p>PDE的高20bit为PT起始的高20bit, 也就是说, 我们要用0101a000来作为PD基地址, 而PDE的低12bit为页表属性, 这里其实关注一下它是否指向的是4MB大内存页就可以了, 如果不是就直接去找它对应的PTE, PTE也是4byte, 所以找法是0x0101a000+4*2e,这里的2e就是线性地址的中间十位  </p>
+<p><img src="/4Cc3.github.io/images/pasted-79.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>然后可以看到这里PTE中存储的内容是0d566163。PTE高20bit指向的是内存页起始地址的高20bit, 即目标地址所在的内存页的基地址为0x0d566000, 低12bit代表的是内存也的属性  </p>
+<p>这里0x0d566000加上前面线性地址的低十位（页内偏移）计算出来的就是真实的物理地址了，结果为0d56604d</p>
+<p><img src="/4Cc3.github.io/images/pasted-80.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>在windbg中使用!pte可以直接看到这些结果, PTEcontains中高20位就是内存页的起始地址, 也就是下面的pfn的内容, pfn加上线性地址的低12位就可以定位到物理地址了</p>
 
                 
               </div>
@@ -346,8 +351,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>实验: flask框架连接mysql数据库</div>
-      <div>https://acceleractor.github.io/4Cc3.github.io/2024/05/09/实验-flask框架连接mysql数据库/</div>
+      <div>页表机制</div>
+      <div>https://acceleractor.github.io/4Cc3.github.io/2024/05/19/页表机制/</div>
     </div>
     <div class="license-meta">
       
@@ -359,7 +364,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 9, 2024</div>
+          <div>May 19, 2024</div>
         </div>
       
       
@@ -391,18 +396,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/05/19/%E9%A1%B5%E8%A1%A8%E6%9C%BA%E5%88%B6/" title="页表机制">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">页表机制</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/04/28/WriteUp-2024%E8%93%9D%E6%A1%A5%E6%9D%AF/" title="WriteUp: 2024蓝桥杯">
-                        <span class="hidden-mobile">WriteUp: 2024蓝桥杯</span>
+                      <a href="/4Cc3.github.io/2024/05/09/%E5%AE%9E%E9%AA%8C-flask%E6%A1%86%E6%9E%B6%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" title="实验: flask框架连接mysql数据库">
+                        <span class="hidden-mobile">实验: flask框架连接mysql数据库</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
