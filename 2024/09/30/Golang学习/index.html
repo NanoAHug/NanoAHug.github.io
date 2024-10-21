@@ -24,7 +24,7 @@
 <meta property="og:description" content="这里记录一下我的Golang入门到实战开发过程   包管理Go中的包管理主要分为两个概念，分别是包和模块，包就相当于一个单独的代码文件，模块则可看做是一个文件夹， 文件夹中有很多个包组成   而导入一个包的方法如下   12345678910package mainimport (	&quot;fmt&quot;	&quot;math&quot;)func main() &amp;#123;	fmt.Pr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-30T06:37:48.000Z">
-<meta property="article:modified_time" content="2024-10-11T08:23:23.630Z">
+<meta property="article:modified_time" content="2024-10-21T15:22:05.087Z">
 <meta property="article:author" content="4Cc3">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.4k words
+          7.5k words
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          62 mins
+          63 mins
         
       </span>
     
@@ -314,7 +314,8 @@
 <p>这里面的split函数就使用了带名字的返回值，可以看到，如果return语句不加任何返回值的话，会默认返回这些带名字的返回值, 如果一个带名字的返回值在函数声明阶段被命名了，但是在函数内部并没有做任何修改，那么这个返回值就会被赋值为默认值（整形为0 字符串为“”）</p>
 <h2 id="可变长参数"><a href="#可变长参数" class="headerlink" title="可变长参数"></a>可变长参数</h2><p>Go中还可以边长参数，用于处理未知长度的参数的问题，使用变长参数使用如下方法  </p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">printNumbers</span><span class="hljs-params">(numbers ...<span class="hljs-type">int</span>)</span></span> &#123;<br>    <span class="hljs-keyword">for</span> _, number := <span class="hljs-keyword">range</span> numbers &#123;<br>        fmt.Println(number)<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    printNumbers(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>    printNumbers(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>可以通过在参数类型前加上…来实现边长参数</p>
+<p>可以通过在参数类型前加上…来实现边长参数  </p>
+<p>当使用变长参数时, 参数实际上是一个切片, 可以通过访问切片的方式访问变长参数</p>
 <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">var</span> x,y <span class="hljs-type">string</span><br>    <span class="hljs-keyword">var</span> a <span class="hljs-type">int</span><br>    <span class="hljs-keyword">var</span> b <span class="hljs-type">float64</span><br>    p *<span class="hljs-type">int</span><br>    a [<span class="hljs-number">3</span>]<span class="hljs-type">int</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>Go语言生命变量用一个var关键字来告诉编译器你声明变量了，然后后面就跟变量名，这里的变量声明的规则最好还是和C++一样，一条变量声明语句里只声明相同类型的变量， 不要写<code>var a int, b float64 </code>这种东西，var 语句可以出现在包或函数的层级。<br>变量初始化时，如果没有指定初始化值，那么变量会被赋值一个默认的值  </p>
