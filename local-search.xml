@@ -299,11 +299,11 @@
   
   
   <entry>
-    <title>Go设计模式</title>
+    <title>Go设计方法</title>
     <link href="/4Cc3.github.io/2024/02/23/Go%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     <url>/4Cc3.github.io/2024/02/23/Go%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
     
-    <content type="html"><![CDATA[<h1 id="函数选项模式"><a href="#函数选项模式" class="headerlink" title="函数选项模式"></a>函数选项模式</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><h2 id="继承和重载"><a href="#继承和重载" class="headerlink" title="继承和重载"></a>继承和重载</h2><p>在Go中, 继承可以使用匿名字段的方式实现</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>    id   <span class="hljs-type">int</span><br>    name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> Manager <span class="hljs-keyword">struct</span> &#123;<br>    User<br>&#125;<br></code></pre></td></tr></table></figure><h1 id="函数选项模式"><a href="#函数选项模式" class="headerlink" title="函数选项模式"></a>函数选项模式</h1>]]></content>
     
     
     
