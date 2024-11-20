@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/4Cc3.github.io/img/luckstar_01.png">
-  <link rel="icon" href="/4Cc3.github.io/img/luckstar_01.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/4Cc3.github.io/img/avatar.png">
+  <link rel="icon" href="/4Cc3.github.io/img/avatar.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,23 +16,21 @@
   <meta name="author" content="4Cc3">
   <meta name="keywords" content="">
   
-    <meta name="description" content="RC4算法原理RC4算法的加密部分就是单纯的将一个密钥流与明文逐字节的进行一次异或，其真正关键的地方在于如何生成密钥流   在生成密钥流的时候用到了两个算法， 分别是key-scheduleing algorithm（KSA）算法和pseudo-random generation algorithm（PRGA），而这两个算法则是RC4的核心 , 接下来将以长度为256的明文为例子  KSAksa首">
+    <meta name="description" content="title: 实验：RC4算法author: 4Cc3tags:  密码学 逆向工程categories: 实验date: 2024-02-18 19:38:21   RC4算法原理RC4算法的加密部分就是单纯的将一个密钥流与明文逐字节的进行一次异或，其真正关键的地方在于如何生成密钥流   在生成密钥流的时候用到了两个算法， 分别是key-scheduleing algorithm（KSA）算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实验：RC4算法">
-<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/02/18/%E5%AE%9E%E9%AA%8C%EF%BC%9ARC4%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:title" content="4Cc3&#39;s Blog">
+<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/11/09/%E5%AE%9E%E9%AA%8C%EF%BC%9ARC4%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
-<meta property="og:description" content="RC4算法原理RC4算法的加密部分就是单纯的将一个密钥流与明文逐字节的进行一次异或，其真正关键的地方在于如何生成密钥流   在生成密钥流的时候用到了两个算法， 分别是key-scheduleing algorithm（KSA）算法和pseudo-random generation algorithm（PRGA），而这两个算法则是RC4的核心 , 接下来将以长度为256的明文为例子  KSAksa首">
+<meta property="og:description" content="title: 实验：RC4算法author: 4Cc3tags:  密码学 逆向工程categories: 实验date: 2024-02-18 19:38:21   RC4算法原理RC4算法的加密部分就是单纯的将一个密钥流与明文逐字节的进行一次异或，其真正关键的地方在于如何生成密钥流   在生成密钥流的时候用到了两个算法， 分别是key-scheduleing algorithm（KSA）算法">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-18T11:38:21.000Z">
-<meta property="article:modified_time" content="2024-03-07T09:34:27.431Z">
+<meta property="article:published_time" content="2024-11-09T05:14:35.880Z">
+<meta property="article:modified_time" content="2024-11-20T07:59:01.838Z">
 <meta property="article:author" content="4Cc3">
-<meta property="article:tag" content="逆向工程">
-<meta property="article:tag" content="加密算法">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>实验：RC4算法 - 4Cc3&#39;s Blog</title>
+  <title>4Cc3&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -96,7 +94,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/4Cc3.github.io/">
-      <strong>Fluid</strong>
+      <strong>4Cc3&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -198,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="实验：RC4算法"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -209,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-18 19:38" pubdate>
-          February 18, 2024 pm
+        <time datetime="2024-11-09 13:14" pubdate>
+          November 9, 2024 pm
         </time>
       </span>
     
@@ -221,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          660 words
+          682 words
         
       </span>
     
@@ -269,12 +267,20 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">实验：RC4算法</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="RC4算法原理"><a href="#RC4算法原理" class="headerlink" title="RC4算法原理"></a>RC4算法原理</h2><p>RC4算法的加密部分就是单纯的将一个密钥流与明文逐字节的进行一次异或，其真正关键的地方在于如何生成密钥流  </p>
+                <hr>
+<p>title: 实验：RC4算法<br>author: 4Cc3<br>tags:</p>
+<ul>
+<li>密码学</li>
+<li>逆向工程<br>categories:</li>
+<li>实验<br>date: 2024-02-18 19:38:21</li>
+</ul>
+<hr>
+<h2 id="RC4算法原理"><a href="#RC4算法原理" class="headerlink" title="RC4算法原理"></a>RC4算法原理</h2><p>RC4算法的加密部分就是单纯的将一个密钥流与明文逐字节的进行一次异或，其真正关键的地方在于如何生成密钥流  </p>
 <p>在生成密钥流的时候用到了两个算法， 分别是key-scheduleing algorithm（KSA）算法和pseudo-random generation algorithm（PRGA），而这两个算法则是RC4的核心 , 接下来将以长度为256的明文为例子</p>
 <hr>
 <h2 id="KSA"><a href="#KSA" class="headerlink" title="KSA"></a>KSA</h2><p>ksa首先会初始化一个S盒， 初始化的过程非常的简单， 只需要将S盒按照1-256依次赋值即可  </p>
@@ -300,36 +306,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/4Cc3.github.io/categories/%E5%AE%9E%E9%AA%8C/" class="category-chain-item">实验</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/4Cc3.github.io/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" class="print-no-link">#逆向工程</a>
-      
-        <a href="/4Cc3.github.io/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="print-no-link">#加密算法</a>
-      
-    </div>
   
 </div>
 
@@ -339,8 +315,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>实验：RC4算法</div>
-      <div>https://acceleractor.github.io/4Cc3.github.io/2024/02/18/实验：RC4算法/</div>
+      <div></div>
+      <div>https://acceleractor.github.io/4Cc3.github.io/2024/11/09/实验：RC4算法/</div>
     </div>
     <div class="license-meta">
       
@@ -352,7 +328,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 18, 2024</div>
+          <div>November 9, 2024</div>
         </div>
       
       
@@ -384,9 +360,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/02/20/%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A/" title="调用约定">
+                      <a href="/4Cc3.github.io/2024/11/18/%E5%BC%80%E5%8F%91%EF%BC%9AGo%E9%A1%B9%E7%9B%AE%E7%BB%84%E7%BB%87/" title="开发：Go项目组织">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">调用约定</span>
+                        <span class="hidden-mobile">开发：Go项目组织</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -394,8 +370,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/02/13/%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E6%9F%90%E4%BA%9B%E8%BF%9B%E5%88%B6%E9%97%AE%E9%A2%98/" title="关于逆向中遇到的变量大小的问题">
-                        <span class="hidden-mobile">关于逆向中遇到的变量大小的问题</span>
+                      <a href="/4Cc3.github.io/2024/11/04/%E5%BC%80%E5%8F%91-Pycharm%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" title="开发: Pycharm远程开发与调试">
+                        <span class="hidden-mobile">开发: Pycharm远程开发与调试</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
