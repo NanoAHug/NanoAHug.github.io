@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/4Cc3.github.io/img/avatar.png">
-  <link rel="icon" href="/4Cc3.github.io/img/avatar.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/naihe-4cc3.github.io/img/avatar.png">
+  <link rel="icon" href="/naihe-4cc3.github.io/img/avatar.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,17 +19,17 @@
     <meta name="description" content="代码交叉引用在IDA中, 指令转交控制权的方式叫做流, 在IDA中有三种流, 分别是普通流, 跳转流, 和调用流   普通流 即为顺序执行,指令按照顺序执行就叫普通流    调用流 即为call这样的指令会被分配到一个调用流, 表示将控制权移交给目标函数, 一般情况下call指令也会被分配到一个普通流(在返回时会继续执行后面的指令)    跳转流 类似jmp jz jnz这样的指令会被分配到跳转流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IDA交叉引用">
-<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/03/04/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/index.html">
+<meta property="og:url" content="https://naihe-4cc3.github.io/2024/03/04/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
 <meta property="og:description" content="代码交叉引用在IDA中, 指令转交控制权的方式叫做流, 在IDA中有三种流, 分别是普通流, 跳转流, 和调用流   普通流 即为顺序执行,指令按照顺序执行就叫普通流    调用流 即为call这样的指令会被分配到一个调用流, 表示将控制权移交给目标函数, 一般情况下call指令也会被分配到一个普通流(在返回时会继续执行后面的指令)    跳转流 类似jmp jz jnz这样的指令会被分配到跳转流">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png">
+<meta property="og:image" content="https://naihe-4cc3.github.io/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png">
 <meta property="article:published_time" content="2024-03-04T13:19:27.000Z">
 <meta property="article:modified_time" content="2024-03-04T15:40:09.325Z">
 <meta property="article:author" content="4Cc3">
 <meta property="article:tag" content="逆向工程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://acceleractor.github.io/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png">
+<meta name="twitter:image" content="https://naihe-4cc3.github.io/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png">
   
   
   
@@ -57,12 +57,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/4Cc3.github.io/css/main.css" />
+<link  rel="stylesheet" href="/naihe-4cc3.github.io/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/4Cc3.github.io/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/naihe-4cc3.github.io/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/4Cc3.github.io/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/naihe-4cc3.github.io/css/highlight-dark.css" />
   
 
 
@@ -71,15 +71,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"acceleractor.github.io","root":"/4Cc3.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/4Cc3.github.io/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"naihe-4cc3.github.io","root":"/naihe-4cc3.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/naihe-4cc3.github.io/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/4Cc3.github.io/js/utils.js" ></script>
-  <script  src="/4Cc3.github.io/js/color-schema.js" ></script>
+  <script  src="/naihe-4cc3.github.io/js/utils.js" ></script>
+  <script  src="/naihe-4cc3.github.io/js/color-schema.js" ></script>
   
 
 
@@ -96,7 +96,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/4Cc3.github.io/">
+    <a class="navbar-brand" href="/naihe-4cc3.github.io/">
       <strong>4Cc3&#39;s Blog</strong>
     </a>
 
@@ -115,7 +115,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>Home</span>
               </a>
@@ -127,7 +127,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/archives/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>Archives</span>
               </a>
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/categories/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>Categories</span>
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/tags/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>Tags</span>
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/about/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
               </a>
@@ -193,7 +193,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/4Cc3.github.io/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/naihe-4cc3.github.io/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -287,7 +287,7 @@
 <h2 id="数据交叉引用"><a href="#数据交叉引用" class="headerlink" title="数据交叉引用"></a>数据交叉引用</h2><p>在ida反汇编页面中, 数据的标题行显示的交叉引用的数量是有限制的, 可以在Options -&gt; General -&gt; Cross-reference -&gt; NUmber of displayed xrefs这个地方进行修改  </p>
 <p>数据交叉引用分为三种  </p>
 <ol>
-<li><p>读取交叉引用<br> 在数据段中, ida会以<code>r</code>为结尾的后缀标注出数据引用 <img src="/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="数据段反汇编"><br>在上图中, DATA XREF后面的标识的最后一位, 即为表示该数据交叉引用是什么类型的, main+E↑r这个引用就代表该引用是一个读取交叉引用</p>
+<li><p>读取交叉引用<br> 在数据段中, ida会以<code>r</code>为结尾的后缀标注出数据引用 <img src="/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png" srcset="/naihe-4cc3.github.io/img/loading.gif" lazyload alt="数据段反汇编"><br>在上图中, DATA XREF后面的标识的最后一位, 即为表示该数据交叉引用是什么类型的, main+E↑r这个引用就代表该引用是一个读取交叉引用</p>
 </li>
 <li><p>写入交叉引用, 后缀通常用w表示, 其代表有代码对改数据进行了写入操作  </p>
 </li>
@@ -313,7 +313,7 @@
     
       <span class="category-chain">
         
-  <a href="/4Cc3.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
+  <a href="/naihe-4cc3.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
   
   
 
@@ -328,7 +328,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/4Cc3.github.io/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" class="print-no-link">#逆向工程</a>
+        <a href="/naihe-4cc3.github.io/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" class="print-no-link">#逆向工程</a>
       
     </div>
   
@@ -341,7 +341,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>IDA交叉引用</div>
-      <div>https://acceleractor.github.io/4Cc3.github.io/2024/03/04/IDA交叉引用/</div>
+      <div>https://naihe-4cc3.github.io/2024/03/04/IDA交叉引用/</div>
     </div>
     <div class="license-meta">
       
@@ -385,7 +385,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/03/09/%E5%AE%9E%E9%AA%8C-AES%E7%AE%97%E6%B3%95/" title="实验: AES算法">
+                      <a href="/naihe-4cc3.github.io/2024/03/09/%E5%AE%9E%E9%AA%8C-AES%E7%AE%97%E6%B3%95/" title="实验: AES算法">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">实验: AES算法</span>
                         <span class="visible-mobile">Previous</span>
@@ -395,7 +395,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/02/25/c-%E5%9F%BA%E7%A1%80/" title="高级C++基础">
+                      <a href="/naihe-4cc3.github.io/2024/02/25/c-%E5%9F%BA%E7%A1%80/" title="高级C++基础">
                         <span class="hidden-mobile">高级C++基础</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -525,8 +525,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/4Cc3.github.io/js/events.js" ></script>
-<script  src="/4Cc3.github.io/js/plugins.js" ></script>
+<script  src="/naihe-4cc3.github.io/js/events.js" ></script>
+<script  src="/naihe-4cc3.github.io/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -548,7 +548,7 @@
 
 
   
-    <script  src="/4Cc3.github.io/js/img-lazyload.js" ></script>
+    <script  src="/naihe-4cc3.github.io/js/img-lazyload.js" ></script>
   
 
 
@@ -647,7 +647,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/4Cc3.github.io/js/local-search.js" ></script>
+  <script  src="/naihe-4cc3.github.io/js/local-search.js" ></script>
 
 
 
@@ -655,7 +655,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/4Cc3.github.io/js/boot.js" ></script>
+<script  src="/naihe-4cc3.github.io/js/boot.js" ></script>
 
 
   

@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/4Cc3.github.io/img/avatar.png">
-  <link rel="icon" href="/4Cc3.github.io/img/avatar.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/naihe-4cc3.github.io/img/avatar.png">
+  <link rel="icon" href="/naihe-4cc3.github.io/img/avatar.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,19 +19,19 @@
     <meta name="description" content="首先, 计算机中最基本的单位是bit, 一个bit只有0或者1两种状态   而在做逆向的过程中最基本的单位是一个byte, 也就是两个十六进制数, 一个byte最大可以表示的整数为255(也就是FF)。 有些同学会发现， ASCII码表的长度刚好也是256， 其刚好是一个byte可表示的全部范围。 在x86架构中，偏移量一般都是用十六进制表示的，并且每一个数字对应的就是一个byte， 例如： [r">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于逆向中遇到的变量大小的问题">
-<meta property="og:url" content="https://acceleractor.github.io/4Cc3.github.io/2024/02/13/%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E6%9F%90%E4%BA%9B%E8%BF%9B%E5%88%B6%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:url" content="https://naihe-4cc3.github.io/2024/02/13/%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E6%9F%90%E4%BA%9B%E8%BF%9B%E5%88%B6%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
 <meta property="og:description" content="首先, 计算机中最基本的单位是bit, 一个bit只有0或者1两种状态   而在做逆向的过程中最基本的单位是一个byte, 也就是两个十六进制数, 一个byte最大可以表示的整数为255(也就是FF)。 有些同学会发现， ASCII码表的长度刚好也是256， 其刚好是一个byte可表示的全部范围。 在x86架构中，偏移量一般都是用十六进制表示的，并且每一个数字对应的就是一个byte， 例如： [r">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-11.png">
-<meta property="og:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-15.png">
+<meta property="og:image" content="https://naihe-4cc3.github.io/4Cc3.github.io/images/pasted-11.png">
+<meta property="og:image" content="https://naihe-4cc3.github.io/4Cc3.github.io/images/pasted-15.png">
 <meta property="article:published_time" content="2024-02-12T16:10:55.000Z">
 <meta property="article:modified_time" content="2024-11-26T07:47:00.920Z">
 <meta property="article:author" content="4Cc3">
 <meta property="article:tag" content="逆向工程">
 <meta property="article:tag" content="深入理解计算机系统">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://acceleractor.github.io/4Cc3.github.io/images/pasted-11.png">
+<meta name="twitter:image" content="https://naihe-4cc3.github.io/4Cc3.github.io/images/pasted-11.png">
   
   
   
@@ -59,12 +59,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/4Cc3.github.io/css/main.css" />
+<link  rel="stylesheet" href="/naihe-4cc3.github.io/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/4Cc3.github.io/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/naihe-4cc3.github.io/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/4Cc3.github.io/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/naihe-4cc3.github.io/css/highlight-dark.css" />
   
 
 
@@ -73,15 +73,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"acceleractor.github.io","root":"/4Cc3.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/4Cc3.github.io/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"naihe-4cc3.github.io","root":"/naihe-4cc3.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/naihe-4cc3.github.io/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/4Cc3.github.io/js/utils.js" ></script>
-  <script  src="/4Cc3.github.io/js/color-schema.js" ></script>
+  <script  src="/naihe-4cc3.github.io/js/utils.js" ></script>
+  <script  src="/naihe-4cc3.github.io/js/color-schema.js" ></script>
   
 
 
@@ -98,7 +98,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/4Cc3.github.io/">
+    <a class="navbar-brand" href="/naihe-4cc3.github.io/">
       <strong>4Cc3&#39;s Blog</strong>
     </a>
 
@@ -117,7 +117,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>Home</span>
               </a>
@@ -129,7 +129,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/archives/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>Archives</span>
               </a>
@@ -141,7 +141,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/categories/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>Categories</span>
               </a>
@@ -153,7 +153,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/tags/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>Tags</span>
               </a>
@@ -165,7 +165,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/4Cc3.github.io/about/" target="_self">
+              <a class="nav-link" href="/naihe-4cc3.github.io/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
               </a>
@@ -195,7 +195,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/4Cc3.github.io/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/naihe-4cc3.github.io/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -280,7 +280,7 @@
                 <p>首先, 计算机中最基本的单位是bit, 一个bit只有0或者1两种状态  </p>
 <p>而在做逆向的过程中最基本的单位是一个byte, 也就是两个十六进制数, 一个byte最大可以表示的整数为255(也就是FF)。 有些同学会发现， ASCII码表的长度刚好也是256， 其刚好是一个byte可表示的全部范围。</p>
 <p>在x86架构中，偏移量一般都是用十六进制表示的，并且每一个数字对应的就是一个byte， 例如： [rsp+0h] 和 [rsp+4h]</p>
-<p><img src="/4Cc3.github.io/images/pasted-11.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful"></p>
+<p><img src="/4Cc3.github.io/images/pasted-11.png" srcset="/naihe-4cc3.github.io/img/loading.gif" lazyload alt="upload successful"></p>
 <p> 这两个都是表示一个取值， 分别对应rsp+4h和rsp+0h位置的值。 而在观察后发现， 这两个变量存储的空间上刚好差了4h， 这里4h代表的就是4 byte， 也就是说， 这两个变量如果类型相同的话， 可以推断出两个变量的长度就为4 byte。 </p>
 <p>而在之前的博文中提到过，x86架构下规定word的长度为2 byte是定死不变的， 所以这里4 byte刚好就是DWORD， 也就是一个整形的长度 ， 即为一个32 bit的数， 对应的就是8位十六进制数（其最大表示为FFFF FFFF） ，此处ida已经帮我们标注好了，该变量是一个无符号整形。</p>
 <p>再通过观察可以发现这两个变量其实是相邻的，那么假如此时有一个调用为v4[1] , 那么这个语句就代表以v4的长度，取其相邻的下一个数。意思就是v4是一个DWORD， 那么v4[1]就是在v4的地址上再加4个byte ，（因为DWORD的长度是4byte），那么v4[1]代表的其实就是v5这个变量。  </p>
@@ -326,7 +326,7 @@
 </tr>
 </tbody></table>
 <p>这里给出的十六进制最大表示数的意义是如下：</p>
-<p><img src="/4Cc3.github.io/images/pasted-15.png" srcset="/4Cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
+<p><img src="/4Cc3.github.io/images/pasted-15.png" srcset="/naihe-4cc3.github.io/img/loading.gif" lazyload alt="upload successful">  </p>
 <p>方便大家用计算器测试， 因为只有用最大表示数才能直观的看出某一个长度的变量到底是多少位</p>
 
                 
@@ -346,7 +346,7 @@
     
       <span class="category-chain">
         
-  <a href="/4Cc3.github.io/categories/%E6%9D%82%E8%B0%88/" class="category-chain-item">杂谈</a>
+  <a href="/naihe-4cc3.github.io/categories/%E6%9D%82%E8%B0%88/" class="category-chain-item">杂谈</a>
   
   
 
@@ -361,9 +361,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/4Cc3.github.io/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" class="print-no-link">#逆向工程</a>
+        <a href="/naihe-4cc3.github.io/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" class="print-no-link">#逆向工程</a>
       
-        <a href="/4Cc3.github.io/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" class="print-no-link">#深入理解计算机系统</a>
+        <a href="/naihe-4cc3.github.io/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" class="print-no-link">#深入理解计算机系统</a>
       
     </div>
   
@@ -376,7 +376,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>关于逆向中遇到的变量大小的问题</div>
-      <div>https://acceleractor.github.io/4Cc3.github.io/2024/02/13/关于计算机中的某些进制问题/</div>
+      <div>https://naihe-4cc3.github.io/2024/02/13/关于计算机中的某些进制问题/</div>
     </div>
     <div class="license-meta">
       
@@ -420,7 +420,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/02/18/%E5%AE%9E%E9%AA%8C%EF%BC%9ARC4%E7%AE%97%E6%B3%95/" title="实验：RC4算法">
+                      <a href="/naihe-4cc3.github.io/2024/02/18/%E5%AE%9E%E9%AA%8C%EF%BC%9ARC4%E7%AE%97%E6%B3%95/" title="实验：RC4算法">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">实验：RC4算法</span>
                         <span class="visible-mobile">Previous</span>
@@ -430,7 +430,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/4Cc3.github.io/2024/02/09/%E5%AE%9E%E9%AA%8C-%E4%BB%8E%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%8A%A0%E8%BD%BD%E5%92%8C%E9%93%BE%E6%8E%A5%E5%85%B1%E4%BA%AB%E5%BA%93/" title="实验: 从应用程序中加载和链接共享库">
+                      <a href="/naihe-4cc3.github.io/2024/02/09/%E5%AE%9E%E9%AA%8C-%E4%BB%8E%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%8A%A0%E8%BD%BD%E5%92%8C%E9%93%BE%E6%8E%A5%E5%85%B1%E4%BA%AB%E5%BA%93/" title="实验: 从应用程序中加载和链接共享库">
                         <span class="hidden-mobile">实验: 从应用程序中加载和链接共享库</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -560,8 +560,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/4Cc3.github.io/js/events.js" ></script>
-<script  src="/4Cc3.github.io/js/plugins.js" ></script>
+<script  src="/naihe-4cc3.github.io/js/events.js" ></script>
+<script  src="/naihe-4cc3.github.io/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -583,7 +583,7 @@
 
 
   
-    <script  src="/4Cc3.github.io/js/img-lazyload.js" ></script>
+    <script  src="/naihe-4cc3.github.io/js/img-lazyload.js" ></script>
   
 
 
@@ -682,7 +682,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/4Cc3.github.io/js/local-search.js" ></script>
+  <script  src="/naihe-4cc3.github.io/js/local-search.js" ></script>
 
 
 
@@ -690,7 +690,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/4Cc3.github.io/js/boot.js" ></script>
+<script  src="/naihe-4cc3.github.io/js/boot.js" ></script>
 
 
   
