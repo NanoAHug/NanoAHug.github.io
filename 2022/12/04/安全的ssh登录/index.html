@@ -16,23 +16,24 @@
   <meta name="author" content="4Cc3">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一直搞不清楚word到底是什么单位，在ida中也经常会见到DWORD和QWORD这些类型，在我的印象里word一直是两个byte组成的，但是又经常看到说word是根据cpu位数决定的，所以在这里写一篇文章记录一下学习探讨的过程   首先，word这个单位是描述计算机进行数据处理的时候一次存取，加工，传送的数据长度，一般与寄存器的长度相同   在32位机中1word是32bit在64位机中1word">
+    <meta name="description" content="简单记录下使用ssh的过程中遇到的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="word到底是什么?">
-<meta property="og:url" content="https://naihe-4cc3.github.io/2024/02/03/x86%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="安全的ssh登录">
+<meta property="og:url" content="https://naihe-4cc3.github.io/2022/12/04/%E5%AE%89%E5%85%A8%E7%9A%84ssh%E7%99%BB%E5%BD%95/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
-<meta property="og:description" content="一直搞不清楚word到底是什么单位，在ida中也经常会见到DWORD和QWORD这些类型，在我的印象里word一直是两个byte组成的，但是又经常看到说word是根据cpu位数决定的，所以在这里写一篇文章记录一下学习探讨的过程   首先，word这个单位是描述计算机进行数据处理的时候一次存取，加工，传送的数据长度，一般与寄存器的长度相同   在32位机中1word是32bit在64位机中1word">
+<meta property="og:description" content="简单记录下使用ssh的过程中遇到的问题">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-03T13:22:35.000Z">
-<meta property="article:modified_time" content="2024-02-25T09:17:12.175Z">
+<meta property="og:image" content="https://naihe-4cc3.github.io/%E5%AE%89%E5%85%A8%E7%9A%84ssh%E7%99%BB%E5%BD%95/00d85d76ed27fc536f4ccffecc03351a.png">
+<meta property="article:published_time" content="2022-12-04T04:45:25.000Z">
+<meta property="article:modified_time" content="2024-12-04T05:29:09.892Z">
 <meta property="article:author" content="4Cc3">
-<meta property="article:tag" content="深入理解计算机系统">
-<meta property="article:tag" content="x86">
+<meta property="article:tag" content="杂谈">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://naihe-4cc3.github.io/%E5%AE%89%E5%85%A8%E7%9A%84ssh%E7%99%BB%E5%BD%95/00d85d76ed27fc536f4ccffecc03351a.png">
   
   
   
-  <title>word到底是什么? - 4Cc3&#39;s Blog</title>
+  <title>安全的ssh登录 - 4Cc3&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="word到底是什么?"></span>
+            <span id="subtitle" data-typed-text="安全的ssh登录"></span>
           
         </div>
 
@@ -209,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-03 21:22" pubdate>
-          February 3, 2024 pm
+        <time datetime="2022-12-04 12:45" pubdate>
+          December 4, 2022 pm
         </time>
       </span>
     
@@ -221,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          187 words
+          578 words
         
       </span>
     
@@ -232,7 +233,7 @@
         
         
         
-          2 mins
+          5 mins
         
       </span>
     
@@ -269,15 +270,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">word到底是什么?</h1>
+            <h1 id="seo-header">安全的ssh登录</h1>
             
             
               <div class="markdown-body">
                 
-                <p>一直搞不清楚word到底是什么单位，在ida中也经常会见到DWORD和QWORD这些类型，在我的印象里word一直是两个byte组成的，但是又经常看到说word是根据cpu位数决定的，所以在这里写一篇文章记录一下学习探讨的过程  </p>
-<p>首先，word这个单位是描述计算机进行数据处理的时候一次存取，加工，传送的数据长度，一般与寄存器的长度相同  </p>
-<p>在32位机中1word是32bit<br>在64位机中1word是64bit<br>在16位机中1word是16bit  </p>
-<p>而intel厂商为了可移植性，统一规定了1word为16bit<br>这也是为什么无论32bit的程序还是64bit的程序在ida反编译的结果中都是1 word对应2 byte</p>
+                <p>在做开发的时候会经常用到ssh进行远程登录，在以前为了方便都是直接使用密码进行登录的，输入ip，账号密码，瞬间搞定，非常方便</p>
+<p>但是最近在遇到被下挖矿病毒后再也不敢头铁使用密码登录了  </p>
+<p><img src="/./%E5%AE%89%E5%85%A8%E7%9A%84ssh%E7%99%BB%E5%BD%95/00d85d76ed27fc536f4ccffecc03351a.png" srcset="/img/loading.gif" lazyload alt="alt text">  </p>
+<p>这里被下毒的根本原因还是没有重视安全，在公网环境中使用弱口令作为ssh的登录密码，导致被扫全网自动下毒了，大部分情况下查看日志可以看到很多ssh密码登录的痕迹。   </p>
+<p>所以为了保证环境安全，建议所有暴露在公网上的主机还是使用密钥对登录，并关闭密码登录，这是百利无一害的  </p>
+<p>使用密钥对登录的方法也很简单，首先使用ssh-keygen生成密钥</p>
+<p><code>ssh-keygen -t rsa -b 4096 -C &quot;SudaSec-DevlopTeam&quot;</code>  </p>
+<p>这里几个参数就不讲了，使用该工具之后会询问生成的文件名称以及是否启用私钥密码，这里直接留空按enter就可以了  </p>
+<p>如果使用默认设置一般是在<code>~/&lt;username&gt;/.ssh</code>这个目录下生成的文件，其中带.pub后缀的是公钥，文件长度较大的是私钥，把私钥下载到客户端主机上用于登录  </p>
+<p>除此之外，还需要修改配置, 修改&#x2F;etc&#x2F;ssh&#x2F;sshd_config文件  </p>
+<pre><code class="text">PubkeyAuthentication yes
+AuthorizedKeysFile      /home/ubuntu/.ssh/id_rsa.pub
+</code></pre>
+<p>其中这里的PubKeyAuthentication是用于开启公钥登录的，后面的AuthorizedKeysFile用于指定公钥地址  </p>
+<p>然后一般来说就可以登录了，但是在客户端主机上还需要做一件事，那就是修改文件权限，因为不修改的话，ssh会认为这个私钥是不安全的，不会拿来使用</p>
+<p>linux系统修改权限<br><code>chmod 600 /path/to/private_key</code></p>
+<p>windows修改会麻烦一些  </p>
+<p>需要先删除原所属用户：</p>
+<p>右键私钥文件，属性 - 安全 - 高级 - 禁用继承 - 应用</p>
+<p>然后再添加用户</p>
+<p>需求右键id_rsa文件，属性 - 安全 - 更改 - 高级  - 立即查找 - 选择当前Windows用户 - 确认 - 应用  </p>
+<p>之后就可以使用ssh私钥连接了  </p>
+<p>然后可以选择在ssh配置文件中禁用密码登录，减少爆破风险</p>
 
                 
               </div>
@@ -296,8 +316,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B1%87%E7%BC%96/" class="category-chain-item">汇编</a>
+  <a href="/categories/%E6%9D%82%E8%B0%88/" class="category-chain-item">杂谈</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9D%82%E8%B0%88/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
+  
+  
+
   
 
       </span>
@@ -311,9 +338,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" class="print-no-link">#深入理解计算机系统</a>
-      
-        <a href="/tags/x86/" class="print-no-link">#x86</a>
+        <a href="/tags/%E6%9D%82%E8%B0%88/" class="print-no-link">#杂谈</a>
       
     </div>
   
@@ -325,8 +350,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>word到底是什么?</div>
-      <div>https://naihe-4cc3.github.io/2024/02/03/x86学习/</div>
+      <div>安全的ssh登录</div>
+      <div>https://naihe-4cc3.github.io/2022/12/04/安全的ssh登录/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +363,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 3, 2024</div>
+          <div>December 4, 2022</div>
         </div>
       
       
@@ -370,21 +395,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/04/hello-world/" title="Hello World">
+                      <a href="/2024/02/03/x86%E5%AD%A6%E4%B9%A0/" title="word到底是什么?">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hello World</span>
+                        <span class="hidden-mobile">word到底是什么?</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2022/12/04/%E5%AE%89%E5%85%A8%E7%9A%84ssh%E7%99%BB%E5%BD%95/" title="安全的ssh登录">
-                        <span class="hidden-mobile">安全的ssh登录</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>

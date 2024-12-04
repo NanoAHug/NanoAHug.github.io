@@ -891,5 +891,32 @@
   
   
   
+  <entry>
+    <title>安全的ssh登录</title>
+    <link href="/2022/12/04/%E5%AE%89%E5%85%A8%E7%9A%84ssh%E7%99%BB%E5%BD%95/"/>
+    <url>/2022/12/04/%E5%AE%89%E5%85%A8%E7%9A%84ssh%E7%99%BB%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<p>在做开发的时候会经常用到ssh进行远程登录，在以前为了方便都是直接使用密码进行登录的，输入ip，账号密码，瞬间搞定，非常方便</p><p>但是最近在遇到被下挖矿病毒后再也不敢头铁使用密码登录了  </p><p><img src="/./%E5%AE%89%E5%85%A8%E7%9A%84ssh%E7%99%BB%E5%BD%95/00d85d76ed27fc536f4ccffecc03351a.png" alt="alt text">  </p><p>这里被下毒的根本原因还是没有重视安全，在公网环境中使用弱口令作为ssh的登录密码，导致被扫全网自动下毒了，大部分情况下查看日志可以看到很多ssh密码登录的痕迹。   </p><p>所以为了保证环境安全，建议所有暴露在公网上的主机还是使用密钥对登录，并关闭密码登录，这是百利无一害的  </p><p>使用密钥对登录的方法也很简单，首先使用ssh-keygen生成密钥</p><p><code>ssh-keygen -t rsa -b 4096 -C &quot;SudaSec-DevlopTeam&quot;</code>  </p><p>这里几个参数就不讲了，使用该工具之后会询问生成的文件名称以及是否启用私钥密码，这里直接留空按enter就可以了  </p><p>如果使用默认设置一般是在<code>~/&lt;username&gt;/.ssh</code>这个目录下生成的文件，其中带.pub后缀的是公钥，文件长度较大的是私钥，把私钥下载到客户端主机上用于登录  </p><p>除此之外，还需要修改配置, 修改&#x2F;etc&#x2F;ssh&#x2F;sshd_config文件  </p><pre><code class="text">PubkeyAuthentication yesAuthorizedKeysFile      /home/ubuntu/.ssh/id_rsa.pub</code></pre><p>其中这里的PubKeyAuthentication是用于开启公钥登录的，后面的AuthorizedKeysFile用于指定公钥地址  </p><p>然后一般来说就可以登录了，但是在客户端主机上还需要做一件事，那就是修改文件权限，因为不修改的话，ssh会认为这个私钥是不安全的，不会拿来使用</p><p>linux系统修改权限<br><code>chmod 600 /path/to/private_key</code></p><p>windows修改会麻烦一些  </p><p>需要先删除原所属用户：</p><p>右键私钥文件，属性 - 安全 - 高级 - 禁用继承 - 应用</p><p>然后再添加用户</p><p>需求右键id_rsa文件，属性 - 安全 - 更改 - 高级  - 立即查找 - 选择当前Windows用户 - 确认 - 应用  </p><p>之后就可以使用ssh私钥连接了  </p><p>然后可以选择在ssh配置文件中禁用密码登录，减少爆破风险</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>杂谈</category>
+      
+      <category>开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>杂谈</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>
