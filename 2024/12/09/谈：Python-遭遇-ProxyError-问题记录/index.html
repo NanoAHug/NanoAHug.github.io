@@ -16,21 +16,24 @@
   <meta name="author" content="4Cc3">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简单记录一下JWT的原理以及使用   什么是JWT？JWT （JSON Web Token） 是目前最流行的跨域认证解决方案，是一种基于 Token 的认证授权机制。 从 JWT 的全称可以看出，JWT 本身也是 Token，一种规范化之后的 JSON 结构的 Token。   JWT的组成有三部分，分别是HEADER、PAYLOAD、SIGNATURE    header: 用于描述jwt的元数">
+    <meta name="description" content="在使用低版本python安装包的时候，一直会出现下面的错误      这里这个很让人沮丧，排查了很多原因都没有找到问题的源头，发现只有使用python3.13的版本才不会报错，最后在网上找到一篇文章溯源了这个报错   点击跳转     这里主要是因为urllib3 更新之后，启用了HTTPS的支持，但是我使用的代理软件V2RayN并没有HTTPS，这也就导致了pip在安装包的时候不能正确建立HTT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开发：GO JWT基础使用">
-<meta property="og:url" content="https://naihe-4cc3.github.io/2024/12/01/%E5%BC%80%E5%8F%91%EF%BC%9AGO-JWT%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="杂谈：Python 遭遇 ProxyError 问题记录">
+<meta property="og:url" content="https://naihe-4cc3.github.io/2024/12/09/%E8%B0%88%EF%BC%9APython-%E9%81%AD%E9%81%87-ProxyError-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
-<meta property="og:description" content="简单记录一下JWT的原理以及使用   什么是JWT？JWT （JSON Web Token） 是目前最流行的跨域认证解决方案，是一种基于 Token 的认证授权机制。 从 JWT 的全称可以看出，JWT 本身也是 Token，一种规范化之后的 JSON 结构的 Token。   JWT的组成有三部分，分别是HEADER、PAYLOAD、SIGNATURE    header: 用于描述jwt的元数">
+<meta property="og:description" content="在使用低版本python安装包的时候，一直会出现下面的错误      这里这个很让人沮丧，排查了很多原因都没有找到问题的源头，发现只有使用python3.13的版本才不会报错，最后在网上找到一篇文章溯源了这个报错   点击跳转     这里主要是因为urllib3 更新之后，启用了HTTPS的支持，但是我使用的代理软件V2RayN并没有HTTPS，这也就导致了pip在安装包的时候不能正确建立HTT">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-12-01T12:17:44.000Z">
-<meta property="article:modified_time" content="2024-12-01T13:04:30.910Z">
+<meta property="og:image" content="https://naihe-4cc3.github.io/images/pasted-93.png">
+<meta property="og:image" content="https://naihe-4cc3.github.io/images/pasted-95.png">
+<meta property="article:published_time" content="2024-12-09T11:08:16.000Z">
+<meta property="article:modified_time" content="2024-12-09T11:32:31.945Z">
 <meta property="article:author" content="4Cc3">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://naihe-4cc3.github.io/images/pasted-93.png">
   
   
   
-  <title>开发：GO JWT基础使用 - 4Cc3&#39;s Blog</title>
+  <title>杂谈：Python 遭遇 ProxyError 问题记录 - 4Cc3&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="开发：GO JWT基础使用"></span>
+            <span id="subtitle" data-typed-text="杂谈：Python 遭遇 ProxyError 问题记录"></span>
           
         </div>
 
@@ -207,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-01 20:17" pubdate>
-          December 1, 2024 pm
+        <time datetime="2024-12-09 19:08" pubdate>
+          December 9, 2024 pm
         </time>
       </span>
     
@@ -219,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          991 words
+          403 words
         
       </span>
     
@@ -230,7 +233,7 @@
         
         
         
-          9 mins
+          4 mins
         
       </span>
     
@@ -267,79 +270,23 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">开发：GO JWT基础使用</h1>
+            <h1 id="seo-header">杂谈：Python 遭遇 ProxyError 问题记录</h1>
             
             
               <div class="markdown-body">
                 
-                <p>简单记录一下JWT的原理以及使用  </p>
-<h1 id="什么是JWT？"><a href="#什么是JWT？" class="headerlink" title="什么是JWT？"></a>什么是JWT？</h1><p>JWT （JSON Web Token） 是目前最流行的跨域认证解决方案，是一种基于 Token 的认证授权机制。 从 JWT 的全称可以看出，JWT 本身也是 Token，一种规范化之后的 JSON 结构的 Token。  </p>
-<p>JWT的组成有三部分，分别是HEADER、PAYLOAD、SIGNATURE  </p>
-<ul>
-<li><p>header: 用于描述jwt的元数据, 其中最主要的字段是”alg”, 也就是生成签名的算法  </p>
-</li>
-<li><p>payload: 用于存放需要传递的数据, 这一部分中最主要的部分是”Claims”, 也就是声明, 可以用于安全传递信息  </p>
-</li>
-<li><p>signature: 用于存放签名算法生成的内容</p>
-</li>
-</ul>
-<p>也就是说, 只有在知道签名算法, 密钥, 内容不被篡改的情况下, jwt才可以被解析出, 这也就保证了数据传递的安全性, 当我们在做开发的时候, 就可以在前端存放jwt, 在后端进行身份校验  </p>
-<h1 id="在Go语言开发的时候如何使用JWT"><a href="#在Go语言开发的时候如何使用JWT" class="headerlink" title="在Go语言开发的时候如何使用JWT"></a>在Go语言开发的时候如何使用JWT</h1><p>首先介绍一个最常用的库  </p>
-<p><code>github.com/golang-jwt/jwt/v4</code>  </p>
-<p>安装之后就可以使用了  </p>
-<h2 id="生成JWT"><a href="#生成JWT" class="headerlink" title="生成JWT"></a>生成JWT</h2><p>在生成JWT之前, 首先要声明一个结构体, 用于作为jwt的payload部分</p>
-<p>这里的Claim结构是开发者自行定义的, 这里我们选择继承自<code>jwt.RegisteredClaims</code>, 因为Claim对象必须要有一个Valid方法, 我们肯定懒得自己写, 就干脆继承自<code>RegisteredClaims</code>直接用框架的就好了</p>
-<p><code>RegisteredClaims</code>中还有一些标准的jwt的字段, 如果有必要的话可以使用, 但是我们这里选择自己声明字段(因为更方便简单)</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Claim <span class="hljs-keyword">struct</span> &#123;<br>	ID        <span class="hljs-type">int</span><br>	ExpiresAt <span class="hljs-type">int64</span><br>	NotBefore <span class="hljs-type">int64</span><br>	jwt.RegisteredClaims<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
-<p>除此之外, signKey是一个需要自己指定的密钥, 这个密钥需要有一定强度防止jwt被解析出  </p>
-<p><code>var signKey = []byte(&quot;hahaha&quot;)</code></p>
-<p>接着就可以按照以下方法生成jwt了  </p>
-<pre><code class="Go">// 生成一个token字符串,若出错返回&quot;&quot;
-func GenerateTokenWithId(id int) (string, error) &#123;
-    claim := &amp;Claim&#123;
-        ID:        id,
-        ExpiresAt: time.Now().Add(1 * 365 * 24 * time.Hour).Unix(), // 设置过期时间为1年后
-
-    &#125;
-
-    token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)
-    tokenString, err := token.SignedString(signKey)
-    if err != nil &#123;
-        return &quot;&quot;, err
-    &#125;
-    return tokenString, nil
-
-&#125;
-</code></pre>
-<p>可以看到, 这里使用<code>jwt.NewWithClaims</code>生成一个Token对象, 然后再使用<code>SignedString</code>方法对token进行签名, 并返回一个字符串, 这个字符串就是我们需要的jwt了  </p>
-<h2 id="解析JWT"><a href="#解析JWT" class="headerlink" title="解析JWT"></a>解析JWT</h2><p>在解析的时候, 一般会收到一个字符串对象, 我们要做的就是把这个字符串对象解析会一个Claim对象(也就是从token解析出payload)  </p>
-<pre><code class="Go">func ParseToken(tokenString string) (*Claim, error) &#123;
-    token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface&#123;&#125;, error) &#123;
-        if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok &#123;
-            return nil, fmt.Errorf(&quot;Unexpected signing method: %v&quot;, token.Header[&quot;alg&quot;])
-        &#125;
-        return signKey, nil
-    &#125;)
-    if err != nil &#123;
-        return nil, err
-    &#125;
-    if claim, ok := token.Claims.(Claim); ok &amp;&amp; token.Valid &#123;
-        return &amp;claim, nil
-    &#125; else &#123;
-        return nil, fmt.Errorf(&quot;Token invalid&quot;)
-    &#125;
-&#125;
-</code></pre>
-<p>这里主要使用一个Parse函数用于处理token  </p>
-<p>Parse的函数签名如下  </p>
-<p><code>func Parse(tokenString string, keyFunc Keyfunc, options ...ParserOption) (*Token, error)</code>  </p>
-<p>这里的第一个参数很好理解, 主要是第二个参数keyFunc, 它是一个有着固定函数签名的函数, 它的作用是返回密钥(或者是一个生成密钥的函数, 这里看你在NewWithClaims的时候选择什么签名算法)  </p>
-<p>这里的keyFunc可以用于检验jwt头部中的加密算法, 并选择对应的处理方式(例如alg字段是HMAC就返回HMAC密钥,是RSA就返回RSA公钥)  如果检验过程中有错误就返回nil,用于触发异常  </p>
-<p>如果没有什么问题, Parse就会返回一个Token对象, 然后我们要做的就是检验一下这个Token对象,( 比如检查一下类型是否是我们自己声明的Claim, 调用一下Valid函数检验token是否被篡改) 如果没什么问题, 直接返回这个token中的Claims就可以了, 接着后端就可以处理相关的工作了</p>
+                <p>在使用低版本python安装包的时候，一直会出现下面的错误  </p>
+<p><img src="/images/pasted-93.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>这里这个很让人沮丧，排查了很多原因都没有找到问题的源头，发现只有使用python3.13的版本才不会报错，最后在网上找到一篇文章溯源了这个报错  </p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350015032">点击跳转</a>    </p>
+<p>这里主要是因为urllib3 更新之后，启用了HTTPS的支持，但是我使用的代理软件V2RayN并没有HTTPS，这也就导致了pip在安装包的时候不能正确建立HTTPS连接，使得SSL握手错误，因此导致了这个问题  </p>
+<p>那么这个问题最后文章中给出的方案是直接更改系统中的代理设置，将HTTPS的请求也使用HTTP的代理  </p>
+<p><code>http=http://127.0.0.1:10809;https=http://127.0.0.1:10809</code></p>
+<p>但是如果使用v2rayN的话，使用自动配置系统代理时会清除掉之前设置过的代理。所以这里的解决方案为直接更改系统代理的配置，并且v2rayN选则清除系统代理即可。  </p>
+<p>对于需要过滤掉的国内网页，也可以直接在windows自带的代理设置中设置</p>
+<p><img src="/images/pasted-95.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
+<p>这里使用正则语法    </p>
+<p>当然，有些时候还会遇到在命令行中的流量不走代理的情况，一般解决方法是在环境变量中配置HTTP_PROXY和HTTPS_PROXY，如果不想让环境变量过于复杂，也可以选择直接在windows自带的系统代理中设置代理IP地址，这么设置之后一般也能解决</p>
 
                 
               </div>
@@ -357,8 +304,8 @@ func GenerateTokenWithId(id int) (string, error) &#123;
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>开发：GO JWT基础使用</div>
-      <div>https://naihe-4cc3.github.io/2024/12/01/开发：GO-JWT基础使用/</div>
+      <div>杂谈：Python 遭遇 ProxyError 问题记录</div>
+      <div>https://naihe-4cc3.github.io/2024/12/09/谈：Python-遭遇-ProxyError-问题记录/</div>
     </div>
     <div class="license-meta">
       
@@ -370,7 +317,7 @@ func GenerateTokenWithId(id int) (string, error) &#123;
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 1, 2024</div>
+          <div>December 9, 2024</div>
         </div>
       
       
@@ -402,9 +349,9 @@ func GenerateTokenWithId(id int) (string, error) &#123;
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/06/%E6%9D%82%E8%B0%88-%E4%BD%BF%E7%94%A8docker%E7%AE%A1%E7%90%86mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" title="杂谈: 记录一次docker+mysql环境配置">
+                      <a href="/2024/12/09/Go%EF%BC%9AContex%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9D%82%E8%B0%88/" title="Go：Context上下文杂谈">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">杂谈: 记录一次docker+mysql环境配置</span>
+                        <span class="hidden-mobile">Go：Context上下文杂谈</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -412,8 +359,8 @@ func GenerateTokenWithId(id int) (string, error) &#123;
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/23/%E5%BC%80%E5%8F%91%EF%BC%9ARPC/" title="开发：使用gRPC进行Go语言开发">
-                        <span class="hidden-mobile">开发：使用gRPC进行Go语言开发</span>
+                      <a href="/2024/12/06/%E6%9D%82%E8%B0%88-%E4%BD%BF%E7%94%A8docker%E7%AE%A1%E7%90%86mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" title="杂谈: 记录一次docker+mysql环境配置">
+                        <span class="hidden-mobile">杂谈: 记录一次docker+mysql环境配置</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
