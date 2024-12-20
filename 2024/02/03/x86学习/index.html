@@ -19,7 +19,7 @@
     <meta name="description" content="一直搞不清楚word到底是什么单位，在ida中也经常会见到DWORD和QWORD这些类型，在我的印象里word一直是两个byte组成的，但是又经常看到说word是根据cpu位数决定的，所以在这里写一篇文章记录一下学习探讨的过程   首先，word这个单位是描述计算机进行数据处理的时候一次存取，加工，传送的数据长度，一般与寄存器的长度相同   在32位机中1word是32bit在64位机中1word">
 <meta property="og:type" content="article">
 <meta property="og:title" content="word到底是什么?">
-<meta property="og:url" content="https://naihe-4cc3.github.io/2024/02/03/x86%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="https://nanoahug.github.io/2024/02/03/x86%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
 <meta property="og:description" content="一直搞不清楚word到底是什么单位，在ida中也经常会见到DWORD和QWORD这些类型，在我的印象里word一直是两个byte组成的，但是又经常看到说word是根据cpu位数决定的，所以在这里写一篇文章记录一下学习探讨的过程   首先，word这个单位是描述计算机进行数据处理的时候一次存取，加工，传送的数据长度，一般与寄存器的长度相同   在32位机中1word是32bit在64位机中1word">
 <meta property="og:locale" content="en_US">
@@ -70,7 +70,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"naihe-4cc3.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"nanoahug.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -326,7 +326,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>word到底是什么?</div>
-      <div>https://naihe-4cc3.github.io/2024/02/03/x86学习/</div>
+      <div>https://nanoahug.github.io/2024/02/03/x86学习/</div>
     </div>
     <div class="license-meta">
       

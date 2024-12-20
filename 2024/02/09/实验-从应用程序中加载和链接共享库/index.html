@@ -19,7 +19,7 @@
     <meta name="description" content="本实验使用linux系统中自带的库函数实现在程序中加载共享库 一般在程序中不会依赖这种方法实现共享库的加载, 更多的情况是在编译阶段通过引入头文件的方式, 直接将需要引入的符号直接在编译阶段引入, 而本实验实现通过一个文件路径和符号名称实现在任意一个程序中加载共享库   本实验将会使用到的函数如下:   12345678910111213#include&lt;dlfcn.h&gt;   void">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实验: 从应用程序中加载和链接共享库">
-<meta property="og:url" content="https://naihe-4cc3.github.io/2024/02/09/%E5%AE%9E%E9%AA%8C-%E4%BB%8E%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%8A%A0%E8%BD%BD%E5%92%8C%E9%93%BE%E6%8E%A5%E5%85%B1%E4%BA%AB%E5%BA%93/index.html">
+<meta property="og:url" content="https://nanoahug.github.io/2024/02/09/%E5%AE%9E%E9%AA%8C-%E4%BB%8E%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%8A%A0%E8%BD%BD%E5%92%8C%E9%93%BE%E6%8E%A5%E5%85%B1%E4%BA%AB%E5%BA%93/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
 <meta property="og:description" content="本实验使用linux系统中自带的库函数实现在程序中加载共享库 一般在程序中不会依赖这种方法实现共享库的加载, 更多的情况是在编译阶段通过引入头文件的方式, 直接将需要引入的符号直接在编译阶段引入, 而本实验实现通过一个文件路径和符号名称实现在任意一个程序中加载共享库   本实验将会使用到的函数如下:   12345678910111213#include&lt;dlfcn.h&gt;   void">
 <meta property="og:locale" content="en_US">
@@ -69,7 +69,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"naihe-4cc3.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"nanoahug.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -347,7 +347,7 @@ execute successfully
   <div class="license-box my-3">
     <div class="license-title">
       <div>实验: 从应用程序中加载和链接共享库</div>
-      <div>https://naihe-4cc3.github.io/2024/02/09/实验-从应用程序中加载和链接共享库/</div>
+      <div>https://nanoahug.github.io/2024/02/09/实验-从应用程序中加载和链接共享库/</div>
     </div>
     <div class="license-meta">
       

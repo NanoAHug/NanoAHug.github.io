@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>C++23漫谈</title>
+    <link href="/2024/12/14/C++23%EF%BC%9A%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A/"/>
+    <url>/2024/12/14/C++23%EF%BC%9A%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A/</url>
+    
+    <content type="html"><![CDATA[<p>鸽了相当长时间的C++编程，这期间尝试了python、go、C#，最终还是觉得C++是经久不衰的编程语言，  </p><p>最开始我觉得C++开发效率太低，各种新特性非常复杂，学习难度很高，有这时间去学点Go，学点python，能用很短的时间就做出来各种各样精美的项目。  </p><p>但是在见证了各种生成式人工智能的威力后，我还是屈服了。越简单的东西就越会受到AI的冲击，因此我对于AI时代的认知就是一定要尝试更加复杂，更加困难，人烟稀少的方向，用于对抗生成式人工智能对人类社会的冲击。  </p><h1 id="结构化绑定"><a href="#结构化绑定" class="headerlink" title="结构化绑定"></a>结构化绑定</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>  <br>&#125;<br></code></pre></td></tr></table></figure><h1 id="多维下表运算符"><a href="#多维下表运算符" class="headerlink" title="多维下表运算符"></a>多维下表运算符</h1><p>在23中，访问数组可以像C#那样访问，直接在一个括号内进行</p><pre><code class="C++">#include &lt;iostream&gt;using namespace std;int v[3][1] = &#123;&#123;1&#125;, &#123;2&#125;, &#123;3&#125;&#125;;int main() &#123;    std::cout &lt;&lt; v[0, 0] &lt;&lt; endl;    std::cout &lt;&lt; v[0][0]&lt;&lt;endl;    std::cout &lt;&lt; *v[0, 0] &lt;&lt; endl;&#125;/*0x7ff60f20300011*/</code></pre><p>直接使用[, …]的方式访问数组只会得到一个指针地址，如果想要获取到值还需要解引用  </p><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>编程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Go：Context上下文杂谈</title>
     <link href="/2024/12/09/Go%EF%BC%9AContex%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9D%82%E8%B0%88/"/>
     <url>/2024/12/09/Go%EF%BC%9AContex%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9D%82%E8%B0%88/</url>

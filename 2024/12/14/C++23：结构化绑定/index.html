@@ -16,32 +16,22 @@
   <meta name="author" content="4Cc3">
   <meta name="keywords" content="">
   
-    <meta name="description" content="首先, MFC是有消息映射和消息分发队列的, 这就导致其反编译出的代码不是那么好看, 所以对于MFC这种程序的逆向就会稍微有别于普通的程序, 这里以清华MLM模型提供的示例程序为例演示MFC逆向的基本流程 (后续如果有机会的话可能会写一篇关于MLM的使用测评) 在IDA中导入MFC函数的结构体 MFC的消息映射类型都是长这个样的  消息映射入口 1234567891011struct AFX_MS">
+    <meta name="description" content="鸽了相当长时间的C++编程，这期间尝试了python、go、C#，最终还是觉得C++是经久不衰的编程语言，   最开始我觉得C++开发效率太低，各种新特性非常复杂，学习难度很高，有这时间去学点Go，学点python，能用很短的时间就做出来各种各样精美的项目。   但是在见证了各种生成式人工智能的威力后，我还是屈服了。越简单的东西就越会受到AI的冲击，因此我对于AI时代的认知就是一定要尝试更加复杂，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实验: MFC逆向">
-<meta property="og:url" content="https://nanoahug.github.io/2024/04/14/%E5%AE%9E%E9%AA%8C-MFC%E9%80%86%E5%90%91/index.html">
+<meta property="og:title" content="C++23漫谈">
+<meta property="og:url" content="https://nanoahug.github.io/2024/12/14/C++23%EF%BC%9A%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A/index.html">
 <meta property="og:site_name" content="4Cc3&#39;s Blog">
-<meta property="og:description" content="首先, MFC是有消息映射和消息分发队列的, 这就导致其反编译出的代码不是那么好看, 所以对于MFC这种程序的逆向就会稍微有别于普通的程序, 这里以清华MLM模型提供的示例程序为例演示MFC逆向的基本流程 (后续如果有机会的话可能会写一篇关于MLM的使用测评) 在IDA中导入MFC函数的结构体 MFC的消息映射类型都是长这个样的  消息映射入口 1234567891011struct AFX_MS">
+<meta property="og:description" content="鸽了相当长时间的C++编程，这期间尝试了python、go、C#，最终还是觉得C++是经久不衰的编程语言，   最开始我觉得C++开发效率太低，各种新特性非常复杂，学习难度很高，有这时间去学点Go，学点python，能用很短的时间就做出来各种各样精美的项目。   但是在见证了各种生成式人工智能的威力后，我还是屈服了。越简单的东西就越会受到AI的冲击，因此我对于AI时代的认知就是一定要尝试更加复杂，">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-53.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-54.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-55.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-56.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-57.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-59.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-58.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-60.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-61.png">
-<meta property="article:published_time" content="2024-04-14T10:50:46.000Z">
-<meta property="article:modified_time" content="2024-11-20T07:57:36.615Z">
+<meta property="article:published_time" content="2024-12-14T08:57:16.000Z">
+<meta property="article:modified_time" content="2024-12-16T05:32:26.615Z">
 <meta property="article:author" content="4Cc3">
-<meta property="article:tag" content="逆向工程">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-53.png">
   
   
   
-  <title>实验: MFC逆向 - 4Cc3&#39;s Blog</title>
+  <title>C++23漫谈 - 4Cc3&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="实验: MFC逆向"></span>
+            <span id="subtitle" data-typed-text="C++23漫谈"></span>
           
         </div>
 
@@ -218,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-14 18:50" pubdate>
-          April 14, 2024 pm
+        <time datetime="2024-12-14 16:57" pubdate>
+          December 14, 2024 pm
         </time>
       </span>
     
@@ -230,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          837 words
+          316 words
         
       </span>
     
@@ -241,7 +231,7 @@
         
         
         
-          7 mins
+          3 mins
         
       </span>
     
@@ -278,41 +268,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">实验: MFC逆向</h1>
+            <h1 id="seo-header">C++23漫谈</h1>
             
             
               <div class="markdown-body">
                 
-                <p>首先, MFC是有消息映射和消息分发队列的, 这就导致其反编译出的代码不是那么好看, 所以对于MFC这种程序的逆向就会稍微有别于普通的程序, 这里以清华MLM模型提供的示例程序为例演示MFC逆向的基本流程</p>
-<p>(后续如果有机会的话可能会写一篇关于MLM的使用测评)</p>
-<h3 id="在IDA中导入MFC函数的结构体"><a href="#在IDA中导入MFC函数的结构体" class="headerlink" title="在IDA中导入MFC函数的结构体"></a>在IDA中导入MFC函数的结构体</h3><p> MFC的消息映射类型都是长这个样的</p>
-<p> 消息映射入口<br> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AFX_MSGMAP_ENTRY</span></span><br><span class="hljs-class">&#123;</span><br>  UINT nMessage;<br>  UINT nCode;<br>  UINT nID;<br>  UINT nLastID;<br>  UINT_PTR nSig;<br>  <span class="hljs-type">void</span> (*pfn)(<span class="hljs-type">void</span>);<br>&#125;;<br><br><br></code></pre></td></tr></table></figure></p>
-<p> 消息映射<br> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C"> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AFX_MSGMAP</span></span><br><span class="hljs-class">&#123;</span><br>  <span class="hljs-type">const</span> AFX_MSGMAP *(__stdcall *pfnGetBaseMap)();<br>  <span class="hljs-type">const</span> AFX_MSGMAP_ENTRY *lpEntries;<br>&#125;;<br><br> <br></code></pre></td></tr></table></figure></p>
-<p> 在view -&gt; subview 中找到localtype, 插入这两个结构体, 并同步到idb中去(这样才会对反编译的代码生效)</p>
-<p><img src="/4Cc3.github.io/images/pasted-53.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
-<h3 id="查找人工手写的函数"><a href="#查找人工手写的函数" class="headerlink" title="查找人工手写的函数"></a>查找人工手写的函数</h3><p>这里一般是需要对MFC的函数地址进行查询, 一般是使用XSPY对桌面窗口的句柄进行查询, 但是这里XSPY不知道为啥查不出该程序的函数, 所以只能自己去手动找了</p>
-<p><img src="/4Cc3.github.io/images/pasted-54.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>这里的话只能是按照经验去找了, 这里MFC的消息映射结构一般都是这个样子的, 一大堆db数据,有很多0 ,并且时不时会出现一个地址, 一般跟在一大堆库MFC库函数后面的, 且都在rdata段</p>
-<p>点edit -&gt; struct var 给该段转换为我们刚刚插入的结构体, 一般是先插入一个AFX_MSGMAP, 然后再插入若干个AFX_MSGMAP_ENTRY 这样,这里的AFXMSGMAP起到的是一个表头的作用, 转换完结构后IDA中的代码就会变成这样  </p>
-<p><img src="/4Cc3.github.io/images/pasted-55.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>那我们此时就能看到, 转换完后的最后一个成员变量就是函数地址, 双击即可跟入了</p>
-<p>上面的操作也仅仅做演示, 因为可以看到这么转换完的函数仍然是一个MFC的库函数,并不是什么人工手写的东西</p>
-<p>这里的话往上翻一下, 可以翻到这个 </p>
-<p><img src="/4Cc3.github.io/images/pasted-56.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
-<p>这里箭头所指的地方是IDA错误的识别了这个结构, 只识别了一半, 这里需要将它转化为db 然后再应用我们新增的MFX结构体</p>
-<p>至于怎么看出来这个地方需要转化成db的, 也只能说是经验之谈了</p>
-<p><img src="/4Cc3.github.io/images/pasted-57.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>这里转换完之后就长这样,可以跟进看里面的函数具体的内容</p>
-<p>这里的sub_7FF6A80E1B70 就是主要加密部分了</p>
-<h3 id="逻辑逆向"><a href="#逻辑逆向" class="headerlink" title="逻辑逆向"></a>逻辑逆向</h3><p>这里看下函数, 发现一个哈希加密的东西, 上微软文档看下函数的API</p>
-<p><img src="/4Cc3.github.io/images/pasted-59.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
-<p>然后发现是MD5<br><img src="/4Cc3.github.io/images/pasted-58.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
-<p><img src="/4Cc3.github.io/images/pasted-60.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>这里有一串神秘数字,应该是key,给它md5解密一下  </p>
-<p><img src="/4Cc3.github.io/images/pasted-61.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
-<p>然后发现也是挺白给的密码,这里就逆向结束了  </p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>MFC逆向如果没有混淆或者是其它反逆向手段的话还是很好逆的, 需要注意的是记得常去搜MFC标准函数的文档, 查看这些函数的作用, 反正这个年代的IDA已经能全识别出来了, 虽然MFC已经逐步被淘汰了, MFC逆向似乎没啥企业价值了, 但是你去逆一下某些大学与其教学水平同样落后的学校的软件还是很有用的</p>
+                <p>鸽了相当长时间的C++编程，这期间尝试了python、go、C#，最终还是觉得C++是经久不衰的编程语言，  </p>
+<p>最开始我觉得C++开发效率太低，各种新特性非常复杂，学习难度很高，有这时间去学点Go，学点python，能用很短的时间就做出来各种各样精美的项目。  </p>
+<p>但是在见证了各种生成式人工智能的威力后，我还是屈服了。越简单的东西就越会受到AI的冲击，因此我对于AI时代的认知就是一定要尝试更加复杂，更加困难，人烟稀少的方向，用于对抗生成式人工智能对人类社会的冲击。  </p>
+<h1 id="结构化绑定"><a href="#结构化绑定" class="headerlink" title="结构化绑定"></a>结构化绑定</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>  <br>&#125;<br></code></pre></td></tr></table></figure>
 
+<h1 id="多维下表运算符"><a href="#多维下表运算符" class="headerlink" title="多维下表运算符"></a>多维下表运算符</h1><p>在23中，访问数组可以像C#那样访问，直接在一个括号内进行</p>
+<pre><code class="C++">#include &lt;iostream&gt;
+using namespace std;
+int v[3][1] = &#123;&#123;1&#125;, &#123;2&#125;, &#123;3&#125;&#125;;
+int main() &#123;
+    std::cout &lt;&lt; v[0, 0] &lt;&lt; endl;
+    std::cout &lt;&lt; v[0][0]&lt;&lt;endl;
+    std::cout &lt;&lt; *v[0, 0] &lt;&lt; endl;
+&#125;
+/*
+0x7ff60f203000
+1
+1
+*/
+</code></pre>
+<p>直接使用[, …]的方式访问数组只会得到一个指针地址，如果想要获取到值还需要解引用  </p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
                 
               </div>
             
@@ -330,7 +312,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%AE%9E%E9%AA%8C/" class="category-chain-item">实验</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
   
   
 
@@ -345,7 +327,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" class="print-no-link">#逆向工程</a>
+        <a href="/tags/C/" class="print-no-link">#C++</a>
       
     </div>
   
@@ -357,8 +339,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>实验: MFC逆向</div>
-      <div>https://nanoahug.github.io/2024/04/14/实验-MFC逆向/</div>
+      <div>C++23漫谈</div>
+      <div>https://nanoahug.github.io/2024/12/14/C++23：结构化绑定/</div>
     </div>
     <div class="license-meta">
       
@@ -370,7 +352,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 14, 2024</div>
+          <div>December 14, 2024</div>
         </div>
       
       
@@ -402,18 +384,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/22/%E6%95%99%E7%A8%8B-Mysql%E8%AF%AD%E5%8F%A5/" title="笔记: Mysql语句">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记: Mysql语句</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/08/C-%E5%AD%A6%E4%B9%A0/" title="C#学习">
-                        <span class="hidden-mobile">C#学习</span>
+                      <a href="/2024/12/09/Go%EF%BC%9AContex%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9D%82%E8%B0%88/" title="Go：Context上下文杂谈">
+                        <span class="hidden-mobile">Go：Context上下文杂谈</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
