@@ -20,22 +20,22 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="符号和符号表">
 <meta property="og:url" content="https://nanoahug.github.io/2024/02/07/%E7%AC%A6%E5%8F%B7%E5%92%8C%E7%AC%A6%E5%8F%B7%E8%A1%A8/index.html">
-<meta property="og:site_name" content="4Cc3&#39;s Blog">
+<meta property="og:site_name" content="NanoAHug&#39;s Blog">
 <meta property="og:description" content="首先先讲一个知识: 在c语言中的static的作用为使符号成为模块内部的私有符号, 类似于c++和java中的private, 加了static的变量或函数则不可在外部模块中被访问。而在后续的描述中，统一把单个执行某一种功能的c语言源文件称为“模块” 在符号表中有以下三种变量：    全局连接器符号（由本模块定义的并且能被其他模块引用的全局符号）， 对应非静态函数和全局变量   外部符号（由其他模">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-5.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-5.png">
 <meta property="article:published_time" content="2024-02-06T22:55:02.000Z">
 <meta property="article:modified_time" content="2024-11-20T07:40:31.757Z">
-<meta property="article:author" content="4Cc3">
+<meta property="article:author" content="NanoAHug">
 <meta property="article:tag" content="逆向工程">
 <meta property="article:tag" content="深入理解计算机系统">
 <meta property="article:tag" content="杂谈">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-5.png">
+<meta name="twitter:image" content="https://nanoahug.github.io/images/pasted-5.png">
   
   
   
-  <title>符号和符号表 - 4Cc3&#39;s Blog</title>
+  <title>符号和符号表 - NanoAHug&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -99,7 +99,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>4Cc3&#39;s Blog</strong>
+      <strong>NanoAHug&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -287,7 +287,7 @@
 <p>在.symtab段中的符号表不包括本地非静态变量的任何符号(局部变量), 因为他们是被存放在栈中的。  </p>
 <p>但是如果局部变量被加了static属性，那么该变量会在.data段和.bss段中被分配一个空间, 并且在.symtab段中有唯一名字的本地连接器符号</p>
 <p>符号表的条目定义如下, 使用readelf即可读到一个目标文件中的符号表</p>
-<p><img src="/4Cc3.github.io/images/pasted-5.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p><img src="/images/pasted-5.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
 
                 
               </div>

@@ -13,27 +13,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="4Cc3">
+  <meta name="author" content="NanoAHug">
   <meta name="keywords" content="">
   
     <meta name="description" content="代码交叉引用在IDA中, 指令转交控制权的方式叫做流, 在IDA中有三种流, 分别是普通流, 跳转流, 和调用流   普通流 即为顺序执行,指令按照顺序执行就叫普通流    调用流 即为call这样的指令会被分配到一个调用流, 表示将控制权移交给目标函数, 一般情况下call指令也会被分配到一个普通流(在返回时会继续执行后面的指令)    跳转流 类似jmp jz jnz这样的指令会被分配到跳转流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IDA交叉引用">
 <meta property="og:url" content="https://nanoahug.github.io/2024/03/04/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/index.html">
-<meta property="og:site_name" content="4Cc3&#39;s Blog">
+<meta property="og:site_name" content="NanoAHug&#39;s Blog">
 <meta property="og:description" content="代码交叉引用在IDA中, 指令转交控制权的方式叫做流, 在IDA中有三种流, 分别是普通流, 跳转流, 和调用流   普通流 即为顺序执行,指令按照顺序执行就叫普通流    调用流 即为call这样的指令会被分配到一个调用流, 表示将控制权移交给目标函数, 一般情况下call指令也会被分配到一个普通流(在返回时会继续执行后面的指令)    跳转流 类似jmp jz jnz这样的指令会被分配到跳转流">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png">
+<meta property="og:image" content="https://nanoahug.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png">
 <meta property="article:published_time" content="2024-03-04T13:19:27.000Z">
 <meta property="article:modified_time" content="2024-03-04T15:40:09.325Z">
-<meta property="article:author" content="4Cc3">
+<meta property="article:author" content="NanoAHug">
 <meta property="article:tag" content="逆向工程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanoahug.github.io/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png">
+<meta name="twitter:image" content="https://nanoahug.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png">
   
   
   
-  <title>IDA交叉引用 - 4Cc3&#39;s Blog</title>
+  <title>IDA交叉引用 - NanoAHug&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -97,7 +97,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>4Cc3&#39;s Blog</strong>
+      <strong>NanoAHug&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -287,7 +287,7 @@
 <h2 id="数据交叉引用"><a href="#数据交叉引用" class="headerlink" title="数据交叉引用"></a>数据交叉引用</h2><p>在ida反汇编页面中, 数据的标题行显示的交叉引用的数量是有限制的, 可以在Options -&gt; General -&gt; Cross-reference -&gt; NUmber of displayed xrefs这个地方进行修改  </p>
 <p>数据交叉引用分为三种  </p>
 <ol>
-<li><p>读取交叉引用<br> 在数据段中, ida会以<code>r</code>为结尾的后缀标注出数据引用 <img src="/4Cc3.github.io/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png" srcset="/img/loading.gif" lazyload alt="数据段反汇编"><br>在上图中, DATA XREF后面的标识的最后一位, 即为表示该数据交叉引用是什么类型的, main+E↑r这个引用就代表该引用是一个读取交叉引用</p>
+<li><p>读取交叉引用<br> 在数据段中, ida会以<code>r</code>为结尾的后缀标注出数据引用 <img src="/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8/image.png" srcset="/img/loading.gif" lazyload alt="数据段反汇编"><br>在上图中, DATA XREF后面的标识的最后一位, 即为表示该数据交叉引用是什么类型的, main+E↑r这个引用就代表该引用是一个读取交叉引用</p>
 </li>
 <li><p>写入交叉引用, 后缀通常用w表示, 其代表有代码对改数据进行了写入操作  </p>
 </li>
@@ -347,7 +347,7 @@
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>4Cc3</div>
+          <div>NanoAHug</div>
         </div>
       
       

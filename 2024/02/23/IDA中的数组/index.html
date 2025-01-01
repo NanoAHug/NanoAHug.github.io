@@ -20,25 +20,25 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="IDA中的数组">
 <meta property="og:url" content="https://nanoahug.github.io/2024/02/23/IDA%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/index.html">
-<meta property="og:site_name" content="4Cc3&#39;s Blog">
+<meta property="og:site_name" content="NanoAHug&#39;s Blog">
 <meta property="og:description" content="在IDA中的数据类型数组是最简单的复合数据结构, 传统意义的数组是包含同一数据类型的连续元素组成的内存块, 也就是说, 数组实际上就是一段内存块的集合。  而在c语言中，我们都熟知的一个东西就是数据类型， 而在计算机底层的概念中，数据类型是一个抽象的概念， 其本质是对一段内存布局中读写数据的长度。   举例来说， 对于c语言中的int类型，其在x86中的长度是四个字节，也就是说计算机如果想读取一个">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-24.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-25.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-27.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-28.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-29.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-30.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-24.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-25.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-27.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-28.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-29.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-30.png">
 <meta property="article:published_time" content="2024-02-23T09:34:15.000Z">
 <meta property="article:modified_time" content="2024-02-29T04:55:45.790Z">
-<meta property="article:author" content="4Cc3">
+<meta property="article:author" content="NanoAHug">
 <meta property="article:tag" content="逆向工程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-24.png">
+<meta name="twitter:image" content="https://nanoahug.github.io/images/pasted-24.png">
   
   
   
-  <title>IDA中的数组 - 4Cc3&#39;s Blog</title>
+  <title>IDA中的数组 - NanoAHug&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -102,7 +102,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>4Cc3&#39;s Blog</strong>
+      <strong>NanoAHug&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -283,12 +283,12 @@
                 <h2 id="在IDA中的数据类型"><a href="#在IDA中的数据类型" class="headerlink" title="在IDA中的数据类型"></a>在IDA中的数据类型</h2><p>数组是最简单的复合数据结构, 传统意义的数组是包含同一数据类型的连续元素组成的内存块, 也就是说, 数组实际上就是一段内存块的集合。 </p>
 <p>而在c语言中，我们都熟知的一个东西就是数据类型， 而在计算机底层的概念中，数据类型是一个抽象的概念， 其本质是对一段内存布局中读写数据的长度。  </p>
 <p>举例来说， 对于c语言中的int类型，其在x86中的长度是四个字节，也就是说计算机如果想读取一个int类型的数据，就要连续的读取四个字节才能正确的表示一个int类型的数  </p>
-<p><img src="/4Cc3.github.io/images/pasted-24.png" srcset="/img/loading.gif" lazyload alt="内存中存储一个int变量">  </p>
+<p><img src="/images/pasted-24.png" srcset="/img/loading.gif" lazyload alt="内存中存储一个int变量">  </p>
 <p>如图所示, 如果在c语言中声明 <em>int a&#x3D;1</em>, 那么在程序编译完成后就会按照上图的形式存储。  </p>
 <p>显然，ida并没有正确识别出其数据类型，这是因为编译器剥离了符号，但是经验丰富的逆向工程师是能够识别出这个变量实际上是一个32位整数。  </p>
 <p>因此，逆向工程师会选择选中该数据，按快捷键d来改变其数据类型，对于那些更加了解ida的逆向工程师来说，他们可能更加乐意在option -&gt; set up datatypes(快捷键Alt + D) 中更改数据类型。</p>
 <h2 id="在IDA中创建数组"><a href="#在IDA中创建数组" class="headerlink" title="在IDA中创建数组"></a>在IDA中创建数组</h2><p>在IDA中，你可以在Edit -&gt; Array中创建数组。在IDA中创建数组的默认大小是根据创建数组的第一个元素的长度决定的，例如创建数组的第一个元素的长度是4字节，那么之后所有的元素长度都是4字节，所以更改好第一个元素的长度很重要，其次就是要填好Array Size，这个代表数组的长度是多少，有几个元素这里就填几  </p>
-<p><img src="/4Cc3.github.io/images/pasted-25.png" srcset="/img/loading.gif" lazyload alt="IDA创建数组对话框">  </p>
+<p><img src="/images/pasted-25.png" srcset="/img/loading.gif" lazyload alt="IDA创建数组对话框">  </p>
 <p>其中有几个选项这里简单介绍一下  </p>
 <ul>
 <li><p>Array Size: 创建数组的长度  </p>
@@ -307,12 +307,12 @@
 <p>这里创建数组时需要自己对反编译的结果进行识别, <strong>gcc编译器在编译时, 如果一个数组并没有过用变量访问数组中的元素时（例如a[i]这种访问方式，只用过a[1]这种常量当访问下标）, 编译器就会对其进行优化, 使得ida无法正确识别出这一串数据是一个数组, 所以需要自己创建数组</strong>, 例如以下程序:  </p>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs inform7">int a<span class="hljs-comment">[17]</span>=&#123;1,2,3,4&#125;;<br>int main()&#123;<br>	a<span class="hljs-comment">[0]</span>+=11;<br>	a<span class="hljs-comment">[2]</span>+=12;<br>	a<span class="hljs-comment">[17]</span>=18;<br>	a<span class="hljs-comment">[16]</span>=20;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>该程序在编译完成并剥离符号表后, 会变成下面这个样子  </p>
-<p><img src="/4Cc3.github.io/images/pasted-27.png" srcset="/img/loading.gif" lazyload alt="IDA伪代码视图"></p>
-<p><img src="/4Cc3.github.io/images/pasted-28.png" srcset="/img/loading.gif" lazyload alt="IDA反汇编视图"></p>
+<p><img src="/images/pasted-27.png" srcset="/img/loading.gif" lazyload alt="IDA伪代码视图"></p>
+<p><img src="/images/pasted-28.png" srcset="/img/loading.gif" lazyload alt="IDA反汇编视图"></p>
 <p>这里选中第一个元素,将其转化位dd(第二个d是double word的意思), 计算下数组长度(源代码中是a[17], 这里数组长度就填18), 然后创建数组, 就可以生成一个数组了。</p>
 <p>可以看到, 在反汇编窗口中并不能直观的看出这段数据是一个数组, 并且还多了一些东西, 初步估计是编辑器为了防止内存溢出设置的缓冲区域  </p>
-<p><img src="/4Cc3.github.io/images/pasted-29.png" srcset="/img/loading.gif" lazyload alt="编译完成后,数组前后会多出20h个字节的区域"></p>
-<p><img src="/4Cc3.github.io/images/pasted-30.png" srcset="/img/loading.gif" lazyload alt="成功创建数组后的ida中伪代码视图"></p>
+<p><img src="/images/pasted-29.png" srcset="/img/loading.gif" lazyload alt="编译完成后,数组前后会多出20h个字节的区域"></p>
+<p><img src="/images/pasted-30.png" srcset="/img/loading.gif" lazyload alt="成功创建数组后的ida中伪代码视图"></p>
 <p>至此, 就成功创建了一个数组, 后面再进行逆向分析都会容易很多。</p>
 
                 
@@ -404,9 +404,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/23/IDA%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%93%E6%9E%84%E4%BD%93/" title="IDA中创建结构体">
+                      <a href="/2024/02/23/Go%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="Go设计方法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">IDA中创建结构体</span>
+                        <span class="hidden-mobile">Go设计方法</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -414,8 +414,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/23/Go%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="Go设计方法">
-                        <span class="hidden-mobile">Go设计方法</span>
+                      <a href="/2024/02/20/%E6%89%8B%E5%86%8C-IDA%E4%BD%BF%E7%94%A8/" title="笔记: IDA使用">
+                        <span class="hidden-mobile">笔记: IDA使用</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

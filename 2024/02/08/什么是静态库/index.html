@@ -20,22 +20,22 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="什么是静态库">
 <meta property="og:url" content="https://nanoahug.github.io/2024/02/08/%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%99%E6%80%81%E5%BA%93/index.html">
-<meta property="og:site_name" content="4Cc3&#39;s Blog">
+<meta property="og:site_name" content="NanoAHug&#39;s Blog">
 <meta property="og:description" content="静态库(static library)是编译系统的一种机制, 用以解决如下问题:    编译器如何向用户提供一些标准函数  一种方式是将标准函数全部放到一个目标文件(object file)中, 但是这么做就需要用户每次编译时采用   linux&gt; gcc main.c &#x2F;usr&#x2F;lib&#x2F;libc.o     这种方法对程序员有适当的便利, 但是缺点是每次编译时都需要把整个目标文件全部拷贝到">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-6.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-7.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-8.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-6.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-7.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-8.png">
 <meta property="article:published_time" content="2024-02-08T03:03:59.000Z">
 <meta property="article:modified_time" content="2024-02-25T09:17:11.491Z">
-<meta property="article:author" content="4Cc3">
+<meta property="article:author" content="NanoAHug">
 <meta property="article:tag" content="深入理解计算机系统">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-6.png">
+<meta name="twitter:image" content="https://nanoahug.github.io/images/pasted-6.png">
   
   
   
-  <title>什么是静态库 - 4Cc3&#39;s Blog</title>
+  <title>什么是静态库 - NanoAHug&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -99,7 +99,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>4Cc3&#39;s Blog</strong>
+      <strong>NanoAHug&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -289,8 +289,8 @@
 <p>所以，静态库的概念被提出来，以解决上述问题。   </p>
 <p>在静态库中， 不同的函数被放在不同的模块中，在连接时，连接器只复制被引用的目标模块，这样就减少了程序的占用空间。  </p>
 <p>下面给出构造静态库和使用静态库的实验  </p>
-<p><img src="/4Cc3.github.io/images/pasted-6.png" srcset="/img/loading.gif" lazyload alt="addvec.c"></p>
-<p><img src="/4Cc3.github.io/images/pasted-7.png" srcset="/img/loading.gif" lazyload alt="mulvec.c"></p>
+<p><img src="/images/pasted-6.png" srcset="/img/loading.gif" lazyload alt="addvec.c"></p>
+<p><img src="/images/pasted-7.png" srcset="/img/loading.gif" lazyload alt="mulvec.c"></p>
 <p>使用如下指令编译  </p>
 <pre><code class="hljs">❯ gcc -c addvec.c multvec.c
 </code></pre>
@@ -299,7 +299,7 @@
 <pre><code class="hljs">linux&gt; ar rcs libvector.a addvec.o mulvec.o  
 </code></pre>
 <p>就可以生成一个名为libvector.a的静态链接库文件(a的意思是archive)</p>
-<p>为了调用生成的库文件, 编写如下源程序<br><img src="/4Cc3.github.io/images/pasted-8.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p>为了调用生成的库文件, 编写如下源程序<br><img src="/images/pasted-8.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
 <p>然后在编译可执行文件时, 使用如下指令  </p>
 <pre><code class="hljs">linux&gt; gcc -c main.c
 </code></pre>

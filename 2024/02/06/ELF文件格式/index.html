@@ -20,23 +20,23 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="ELF文件格式简述">
 <meta property="og:url" content="https://nanoahug.github.io/2024/02/06/ELF%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/index.html">
-<meta property="og:site_name" content="4Cc3&#39;s Blog">
+<meta property="og:site_name" content="NanoAHug&#39;s Blog">
 <meta property="og:description" content="计算机编译可执行文件时的步骤 在计算机编译可执行文件时主要分为以下几个步骤:    对于一个或多个(在定义实现的情况下是多个源文件)c语言编写的ascii源文件,先由预处理器将头文件,宏定义等内容替换, 形成一个ascii码的中间文件: .i文件, 此时文本和编写的源代码差别不是很大   编译器(ccl)将.i文件翻译成一个ascii的汇编语言文件: .s文件 ,里面是可读的汇编指令 汇编器(as">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-1.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-2.png">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-3.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-1.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-2.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-3.png">
 <meta property="article:published_time" content="2024-02-06T09:40:59.000Z">
 <meta property="article:modified_time" content="2024-02-25T09:17:15.298Z">
-<meta property="article:author" content="4Cc3">
+<meta property="article:author" content="NanoAHug">
 <meta property="article:tag" content="逆向工程">
 <meta property="article:tag" content="深入理解计算机系统">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-1.png">
+<meta name="twitter:image" content="https://nanoahug.github.io/images/pasted-1.png">
   
   
   
-  <title>ELF文件格式简述 - 4Cc3&#39;s Blog</title>
+  <title>ELF文件格式简述 - NanoAHug&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -100,7 +100,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>4Cc3&#39;s Blog</strong>
+      <strong>NanoAHug&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -299,7 +299,7 @@
 <h3 id="ELF-可重定位目标文件的格式"><a href="#ELF-可重定位目标文件的格式" class="headerlink" title="ELF 可重定位目标文件的格式"></a>ELF 可重定位目标文件的格式</h3><p>ELF header以十六字节的序列开始，该序列描述了生成文件的word长度和字节顺序。<br>而其剩下的部分包含各类信息，其包括  </p>
 <p><strong>ELF头的大小，目标文件的类型，（可执行，共享，可重定位），机器类型（x86-64）,section header table的文件偏移，section header table的条目数量和大小等</strong>   </p>
 <p>不同节的位置和大小都是由section header table描述的，其中目标文件中每一个字节都有一个固定大小的entry。  </p>
-<p><img src="/4Cc3.github.io/images/pasted-1.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
+<p><img src="/images/pasted-1.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
 <p>在section header table和elf文件头中间的就是节， 一般elf文件包含以下几个节  </p>
 <table>
 <thead>
@@ -359,8 +359,8 @@
 __attribute__((destructor));  
 </code></pre>
 <p> 这个语句可以用来给函数设置属性, 变量属性, 类型属性<br> 而其中的constructor和destructor为构造函数的属性, 这类函数将会在main函数之前被执行, 可见在加了该属性的函数在ida中则会在init_array段被调用</p>
-<p><img src="/4Cc3.github.io/images/pasted-2.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
-<p><img src="/4Cc3.github.io/images/pasted-3.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
+<p><img src="/images/pasted-2.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p><img src="/images/pasted-3.png" srcset="/img/loading.gif" lazyload alt="upload successful">  </p>
 <p>在windows平台下，该语法仍然成立</p>
 <p>在constructor中还可以携带参数， 例如  </p>
 <pre><code class="hljs">__attribute__((constructor(100))) void load_init();

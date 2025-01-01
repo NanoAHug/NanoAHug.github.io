@@ -20,21 +20,21 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="什么是动态库">
 <meta property="og:url" content="https://nanoahug.github.io/2024/02/08/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8A%A8%E6%80%81%E5%BA%93/index.html">
-<meta property="og:site_name" content="4Cc3&#39;s Blog">
+<meta property="og:site_name" content="NanoAHug&#39;s Blog">
 <meta property="og:description" content="动态库的全称是_”动态链接共享库”_  , 其是一个目标模块, 在运行和加载时可以加载到任意的内存地址, 并和一个在内存中的程序链接起来, 这个过程叫做 动态链接(dynamic linking)  , 其是由一个叫做 动态链接器(dynamic linker) 的程序来执行的。 在linux中动态库通常被叫做共享目标（shared object） 用.so作为后缀, 而在windows中叫做动态">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-9.png">
+<meta property="og:image" content="https://nanoahug.github.io/images/pasted-9.png">
 <meta property="article:published_time" content="2024-02-08T10:58:43.000Z">
 <meta property="article:modified_time" content="2024-11-26T07:46:12.810Z">
-<meta property="article:author" content="4Cc3">
+<meta property="article:author" content="NanoAHug">
 <meta property="article:tag" content="深入理解计算机系统">
 <meta property="article:tag" content="杂谈">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanoahug.github.io/4Cc3.github.io/images/pasted-9.png">
+<meta name="twitter:image" content="https://nanoahug.github.io/images/pasted-9.png">
   
   
   
-  <title>什么是动态库 - 4Cc3&#39;s Blog</title>
+  <title>什么是动态库 - NanoAHug&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -98,7 +98,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>4Cc3&#39;s Blog</strong>
+      <strong>NanoAHug&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -279,7 +279,7 @@
                 <p>动态库的全称是_”动态链接共享库”_  , 其是一个目标模块, 在运行和加载时可以加载到任意的内存地址, 并和一个在内存中的程序链接起来, 这个过程叫做 <em>动态链接(dynamic linking)</em>  , 其是由一个叫做 <em>动态链接器(dynamic linker)</em> 的程序来执行的。</p>
 <p>在linux中动态库通常被叫做共享目标（shared object） 用.so作为后缀, 而在windows中叫做动态链接库, 用.dll做后缀  </p>
 <p>动态链接库的工作原理如下:  </p>
-<p><img src="/4Cc3.github.io/images/pasted-9.png" srcset="/img/loading.gif" lazyload alt="动态链接库工作流程">  </p>
+<p><img src="/images/pasted-9.png" srcset="/img/loading.gif" lazyload alt="动态链接库工作流程">  </p>
 <p><em>此处的图片出自《深入理解计算机系统》，main2.c在本文中命名为main.c, prog21在本文中命名为prog</em></p>
 <p>首先, 先由翻译器将main.c中的代码(以及其引入的头文件) 编译成obj文件, 其次再由链接器将so文件和obj文件链接起来, 在执行时, 加载器会根据链接时指定的<br>地址来加载so文件中的代码段 ,这个过程由动态链接器完成, 下面给出实验过程  </p>
 <p><em>注意: 此时使用的代码与上一章””什么是静态库”中展示的代码相同</em>  </p>
